@@ -1,0 +1,177 @@
+{
+    "roles": ["Doers", "Donors"],
+    "doers": [{
+            "general": {
+                "firstName": "Alex",
+                "lastName": "Thomas",
+                "toE": "Non-profit",
+                "industry": "none",
+                "interest": "help",
+                "award": "string"
+            },
+            "purpose": {
+                "ourStory": "string",
+                "focusMission": "string",
+                "niche": "string"
+            },
+            "contact": {
+                "email": "aletho24@gmail.com",
+                "phone": 1244354323,
+                "website": "https://www.github.com/axtho24"
+            },
+            "accountability": {
+                "annualReports": "none",
+                "govFilings": "none",
+                "accreditations": "TIY",
+                "financialHighs": "string"
+            },
+            "beneficiaries": {
+                "beneficiaries1": "string",
+                "beneficiaries2": "TIY"
+            },
+            "performance": {
+                "ninetydayGoals": [{
+                    "category": "Fund",
+                    "owner": "string",
+                    "smartGoals": "string",
+                    "dateSet": "Nov-5",
+                    "endDate": "Feb-13",
+                    "goalMet": "true"
+                }],
+                "weeklyScore": [{
+                    "category": "String",
+                    "owner": "String",
+                    "measurable": "String",
+                    "goal": "string",
+                    "weekbegin": "datestarted",
+                    "weekEnd": "dateend"
+                }],
+                "yearand3years": [{
+                    "category": "String",
+                    "owner": "String",
+                    "smartGoals": "String",
+                    "dateSet": "datestarted",
+                    "endDate": "dateend",
+                    "goalMet": "boolean"
+                }]
+            }
+        },
+        {
+            "general": {
+                "firstName": "Huy",
+                "lastName": "Luong",
+                "toE": "Non-profit",
+                "industry": "none",
+                "interest": "string",
+                "award": "string"
+            },
+            "purpose": {
+                "ourStory": "string",
+                "focusMission": "string",
+                "niche": "string"
+            },
+            "contact": {
+                "email": "huyluonh88@gmail.com",
+                "phone": 1576646435,
+                "website": "https://www.github.com/huyluonh88"
+            },
+            "accountability": {
+                "annualReports": "String",
+                "govFilings": "String",
+                "accreditations": "String",
+                "financialHighs": "FinanceStuff"
+            },
+            "beneficiaries": {
+                "beneficiaries1": "Description & Link",
+                "beneficiaries2": "Description & Link"
+            },
+            "performance": {
+                "ninetydayGoals": [{
+                    "category": "String",
+                    "owner": "String",
+                    "smartGoals": "String",
+                    "dateSet": "datestarted",
+                    "endDate": "dateend",
+                    "goalMet": "boolean"
+                }],
+                "weeklyScore": [{
+                    "category": "String",
+                    "owner": "String",
+                    "measurable": "String",
+                    "goal": "string",
+                    "weekbegin": "datestarted",
+                    "weekEnd": "dateend"
+                }],
+                "yearand3years": [{
+                    "category": "String",
+                    "owner": "String",
+                    "smartGoals": "String",
+                    "dateSet": "datestarte",
+                    "endDate": "dateend",
+                    "goalMet": "boolean"
+                }]
+            }
+        }
+    ],
+    "donors": [{
+            "general": {
+                "firstName": "Brian",
+                "lastName": "Gates",
+                "toE": "string",
+                "industry": "String",
+                "interest": "string",
+                "award": "String"
+            },
+            "purpose": {
+                "ourStory": "String",
+                "focusMission": "String",
+                "niche": "string"
+            },
+            "contact": {
+                "email": "emailhere",
+                "phone": 9685674534,
+                "website": "asdasd.com"
+            },
+            "employees": {
+                "employee1": {
+                    "employee1name": "name",
+                    "employee1pic": "Employee1pic"
+                },
+                "employee2": {
+                    "employee2name": "name",
+                    "employee2pic": "Employee2pic"
+                }
+            }
+        },
+        {
+            "general": {
+                "firstName": "Susanna",
+                "lastName": "Miller",
+                "toE": "string",
+                "industry": "String",
+                "interest": "string",
+                "award": "String"
+            },
+            "purpose": {
+                "ourStory": "String",
+                "focusMission": "String",
+                "niche": "string"
+            },
+            "contact": {
+                "email": "emailhere",
+                "phone": 643728,
+                "website": "asdasd.com"
+            },
+            "employees": {
+                "employee1": {
+                    "employee1name": "name",
+                    "employee1pic": "Employee1pic"
+                },
+                "employee2": {
+                    "employee2name": "name",
+                    "employee2pic": "Employee2pic"
+                }
+            }
+        }
+    ]
+}

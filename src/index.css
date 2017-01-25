@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+header{
+  display: flex;
+}
+
+.back {
+  width: 100%;
+  filter: blur(2px);
+  height: 15em;
+}
+
+.logo {
+  position: fixed;
+  height: 15em;
+}
+
+.utilities {
+  display: flex;
+  width: 30%;
+  margin: auto;
+}
+
+.buttons {
+  width: 15em;
+}
+
+Link {
+  width: 10em;
+}
+
+.signUp {
+  display: flex;
+  width: 30%;
+  margin: auto;
+}
