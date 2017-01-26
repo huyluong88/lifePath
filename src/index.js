@@ -9,8 +9,8 @@ import DonorSignUp from './DonorSignUp';
 ReactDOM.render(
   <Router history={hashHistory}>
   <Route  path="/" component={App}/>
-  <Route path="/:DoerSignUp" component={DoerSignUp}/>
-  <Route path="/:DonorSignUp" component={DonorSignUp}/>
+  <Route path="/DoerSignUp" component={DoerSignUp}/>
+  <Route path="/DonorSignUp" component={DonorSignUp}/>
 </Router>,
   document.getElementById('root')
 );
