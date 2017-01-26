@@ -23,8 +23,15 @@ componentDidMount(){
 }
 
 addDoer(){
+  const firstName = this.firstname.value
+  const lastName = this.lastname.value
+  if (firstName.length === 0 && lastName.length === 0){
+  alert('enter a first and last name')
+} else if (firstName.length < 2 && lastName.length < 2) {
+  alert('enter a valid name')
+} else {
   let newDoer = {
-    general: { firstName : this.firstname.value, lastName: this.lastname.value, toE: this.toE.value,
+    general: { firstName : firstName , lastName: lastName , toE: this.toE.value,
                 industry: this.industry.value, award: this.award.value},
     purpose: { ourStory: this.ourStory.value, focusMission: this.focusMission.value, niche: this.niche.value},
     contact: { email: this.email.value, phone: this.phone.value, website: this.website.value},
@@ -62,6 +69,7 @@ addDoer(){
     doers: newDoersArray
   })
   this.props.router.push('/')
+  }
 }
 
 
