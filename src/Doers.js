@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import base  from './config';
 
 
+
 class Doers extends Component {
   constructor(){
     super()
     this.state = {
-      doers : []
+      doers : [],
+      profile : ''
     }
   }
 componentDidMount(){
@@ -21,14 +23,24 @@ componentDidMount(){
     }
   })
 }
+openProfile(user){
+  this.setState({
+    profile:user.general.firstName + user.general.lastName + user.contact.email
+  })
+  console.log(user)
+  this.props.onClick(user)
+}
 
 render (){
   return(
-    <ul>
-      {this.state.doers.map((doer, index) => {
-        return (<li key={index}>{doer.general.firstName} {doer.general.lastName}</li>)
-      })}
-    </ul>
+    <div>
+      <ul>
+        {this.state.doers.map((doer, index) => {
+          return (<li onClick={this.openProfile.bind(this, doer)} key={index}>{doer.general.firstName} {doer.general.lastName}</li>)
+        })}
+      </ul>
+      {this.state.profile}
+    </div>
   )
 }
 
