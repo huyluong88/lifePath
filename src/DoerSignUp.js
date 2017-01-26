@@ -11,7 +11,7 @@ class DoerSignUp extends Component {
     super()
     this.state = {
       doers: [],
-      disabled: true
+      disabled: false
     }
   }
 componentDidMount(){
