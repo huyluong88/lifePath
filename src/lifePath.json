@@ -6,7 +6,6 @@
                 "lastName": "Thomas",
                 "toE": "Non-profit",
                 "industry": "none",
-                "interest": "help",
                 "award": "string"
             },
             "purpose": {
@@ -62,7 +61,6 @@
                 "lastName": "Luong",
                 "toE": "Non-profit",
                 "industry": "none",
-                "interest": "string",
                 "award": "string"
             },
             "purpose": {

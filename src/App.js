@@ -58,11 +58,11 @@ class App extends Component {
 
           <div className="signUp">
 
-            <Link to ="/DoerSignUp"><RaisedButton label="Be a Doer" primary={true} style={style} className="buttons"/
-            ></Link>
+            <Link to ="/DoerSignUp"><RaisedButton label="Be a Doer" primary={true} style={style} className="buttons"/>
+            </Link>
 
-            <RaisedButton label="Be a Donor" primary={true} style={style} className="buttons"
-            />
+            <Link to ="/DonorSignUp"><RaisedButton label="Be a Donor" primary={true} style={style} className="buttons"/>
+            </Link>
 
           </div>
           <footer>
