@@ -23,11 +23,13 @@ class App extends Component {
     super()
     this.state = {
       open: false,
-      open2: false
+      open2: false,
+      userProfile: ''
     }
   }
   handleToggle = () => this.setState({open: !this.state.open});
   handleToggle2 = () => this.setState({open2: !this.state.open2});
+
 
 
 
@@ -45,14 +47,14 @@ class App extends Component {
 
               <Drawer open={this.state.open}>
                 <AppBar showMenuIconButton={false} title="Doers" />
-                <Doers />
+                  <Doers/>
               </Drawer>
 
             <RaisedButton label="Donors" primary={true} style={style} className="buttons"
             onClick={this.handleToggle2}/>
               <Drawer width={250} openSecondary={true} open={this.state.open2} >
                 <AppBar showMenuIconButton={false} title="Donors" />
-                <Donors />
+                  <Donors />
               </Drawer>
           </div>
 
@@ -65,6 +67,7 @@ class App extends Component {
             </Link>
 
           </div>
+
           <footer>
           </footer>
         </div>
