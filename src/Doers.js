@@ -5,6 +5,7 @@ import { withRouter } from 'react-router';
 
 
 
+
 class Doers extends Component {
   constructor(){
     super()
@@ -14,6 +15,7 @@ class Doers extends Component {
       about: '',
       email: '',
       open: false
+
     }
   }
 componentDidMount(){
@@ -63,6 +65,7 @@ render (){
         <h3> Contact Information </h3>
         {this.state.email}
         </Dialog>
+
     </div>
   )
 }
