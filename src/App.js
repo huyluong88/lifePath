@@ -29,11 +29,7 @@ class App extends Component {
   }
   handleToggle = () => this.setState({open: !this.state.open});
   handleToggle2 = () => this.setState({open2: !this.state.open2});
-  openUser(user){
-    this.setState({
-      userProfile: user.general.firstName + user.general.lastName + user.contact.email
-    })
-  }
+
 
 
 
