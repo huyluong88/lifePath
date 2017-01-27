@@ -37,6 +37,7 @@ class App extends Component {
 
 
 
+
   render() {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
@@ -51,8 +52,8 @@ class App extends Component {
 
               <Drawer open={this.state.open}>
                 <AppBar showMenuIconButton={false} title="Doers" />
-                  <Doers
-                  onClick={this.openUser.bind(this)}/>
+                  <Doers/>
+
               </Drawer>
 
             <RaisedButton label="Donors" primary={true} style={style} className="buttons"
@@ -72,8 +73,6 @@ class App extends Component {
             </Link>
 
           </div>
-            <h1>User Profile</h1>
-            <h2>{this.state.userProfile}</h2>
 
           <footer>
           </footer>

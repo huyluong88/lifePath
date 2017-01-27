@@ -10,7 +10,7 @@ header{
 
 .back {
   width: 100%;
-  filter: blur(2px);
+  filter: blur(1px);
   height: 15em;
 }
 
