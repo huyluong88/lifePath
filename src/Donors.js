@@ -24,12 +24,13 @@ componentDidMount(){
 
 render (){
   return(
-
+    <div>
     <ul>
       {this.state.donors.map((donor, index) => {
         return (<li key={index}>{donor.general.firstName} {donor.general.lastName}</li>)
       })}
     </ul>
+    </div>
   )
 }
 
