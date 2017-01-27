@@ -65,6 +65,7 @@ render (){
         <h3> Contact Information </h3>
         {this.state.email}
         </Dialog>
+        <h1>Github Test</h1>
 
     </div>
   )
