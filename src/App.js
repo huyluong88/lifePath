@@ -29,11 +29,8 @@ class App extends Component {
   }
   handleToggle = () => this.setState({open: !this.state.open});
   handleToggle2 = () => this.setState({open2: !this.state.open2});
-  openUser(user){
-    this.setState({
-      userProfile: user.general.firstName + user.general.lastName + user.contact.email
-    })
-  }
+
+
 
 
 
@@ -51,8 +48,8 @@ class App extends Component {
 
               <Drawer open={this.state.open}>
                 <AppBar showMenuIconButton={false} title="Doers" />
-                  <Doers
-                  onClick={this.openUser.bind(this)}/>
+                  <Doers/>
+
               </Drawer>
 
             <RaisedButton label="Donors" primary={true} style={style} className="buttons"
@@ -72,8 +69,6 @@ class App extends Component {
             </Link>
 
           </div>
-            <h1>User Profile</h1>
-            <h2>{this.state.userProfile}</h2>
 
           <footer>
           </footer>
