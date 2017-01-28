@@ -8,6 +8,10 @@ header{
   display: flex;
 }
 
+li {
+  list-style: none;
+}
+
 .back {
   width: 100%;
   filter: blur(1px);
@@ -15,25 +19,27 @@ header{
 }
 
 .logo {
-  position: fixed;
-  height: 15em;
+  margin: 0 auto;
+}
+
+img {
+  height: 10em;
 }
 
 .utilities {
+  text-align: center;
   display: flex;
   width: 30%;
   margin: auto;
 }
 
 .buttons {
-  width: 15em;
+  width: 9em;
 }
 
-Link {
-  width: 10em;
-}
 
 .signUp {
+  text-align: center;
   display: flex;
   width: 30%;
   margin: auto;

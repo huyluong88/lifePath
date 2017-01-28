@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import base  from './config';
 import Dialog from 'material-ui/Dialog';
 import { withRouter } from 'react-router';
-
-
-
+import FlatButton from 'material-ui/FlatButton';
 
 class Doers extends Component {
   constructor(){
@@ -12,8 +10,8 @@ class Doers extends Component {
     this.state = {
       doers : [],
       name : '',
-      about: '',
-      email: '',
+      details: '',
+      contact: '',
       open: false
 
     }
@@ -34,15 +32,24 @@ openProfile(user){
   console.log(user)
   this.setState({
     name: `${user.general.firstName} ${user.general.lastName}`,
-    about: `${user.general.toE} ${user.general.industry} ${user.general.award}`,
-    email: `${user.contact.email}`,
+    details: `Type of Entity: ${user.general.toE} Industry: ${user.general.industry} Awards: ${user.general.award}`,
+    contact: `Email: ${user.contact.email} Phone: ${user.contact.phone} Website: ${user.contact.website}`,
     open: true
   })
-  this.props.router.push(`/${this.state.name}`)
-  this.props.pickles(user)
 }
 
+handleClose = () => this.setState({open: !this.state.open});
+
 render (){
+
+  const actions = [
+    <FlatButton
+      label="Close"
+      primary={true}
+      onClick={this.handleClose}
+    />
+  ];
+
   return(
     <div>
       <ul>
@@ -51,21 +58,20 @@ render (){
         })}
       </ul>
       <Dialog
-          title="Scrollable Dialog"
+          title="Doer Information"
+          actions={actions}
           open={this.state.open}
           autoScrollBodyContent={true}
         >
-        <h1>Doer</h1>
         <h3> Name </h3>
         {this.state.name}
 
-        <h3>About</h3>
-        {this.state.about}
+        <h3>Details</h3>
+        {this.state.details}
 
         <h3> Contact Information </h3>
-        {this.state.email}
+        {this.state.contact}
         </Dialog>
-        <h1>Github Test</h1>
 
     </div>
   )
