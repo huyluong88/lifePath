@@ -35,12 +35,14 @@ class App extends Component {
 
 
   render() {
+
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
         <div className="App">
-          <header>
-            <img className="back" src= { pic2 }/>
-            <img className="logo" src= { pic }/>
+          <header className="App-header">
+            <div className="logo">
+            <img src= { pic }/>
+            </div>
           </header>
           <div className="utilities">
             <RaisedButton label="Doers" primary={true} style={style} className="buttons"
