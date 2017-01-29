@@ -13,7 +13,8 @@ class Donors extends Component {
       name : '',
       details: '',
       contact: '',
-      open: false
+      open: false,
+      donorResult: []
     }
   }
 
@@ -31,6 +32,26 @@ componentDidMount(){
 }
 
 handleClose = () => this.setState({open: !this.state.open});
+searchADonor = () => {
+    const search = this.searchDonor.value
+    console.log(search)
+    const mapDonor = this.state.donors.map(donor => {
+        return (donor)
+    })
+    console.log('your donors are ', mapDonor)
+    const donor = mapDonor.filter(donor => {
+        return (donor.general.firstName == `${search}`)
+    })
+    console.log('your search result is ', donor)
+    if (donor == '') {
+        alert('no result')
+    } else {
+        this.setState({
+            donorResult: donor
+        })
+    }
+    this.searchDonor.value = ''
+}
 
 
 openProfile(user){
@@ -42,8 +63,6 @@ openProfile(user){
     contact: `Email: ${user.contact.email} Phone: ${user.contact.phone} Website: ${user.contact.website}`,
     open: true
   })
-  this.props.router.push(`/${this.state.name}`)
-  this.props.pickles(user)
 }
 
 render (){
@@ -58,6 +77,13 @@ render (){
 
   return(
     <div>
+    <input placeholder="Search for a donor" ref={element => this.searchDonor = element}/>
+    <FlatButton
+      label="Search"
+      primary={true}
+      onClick={this.searchADonor}
+    />
+
       <ul>
         {this.state.donors.map((donor, index) => {
           return (<li onClick={this.openProfile.bind(this, donor)} key={index}> {donor.general.firstName} {donor.general.lastName}</li>)
@@ -78,7 +104,8 @@ render (){
         <h3> Contact Information </h3>
         {this.state.contact}
         </Dialog>
-
+        {this.state.donorResult.map(donor=>{
+          return(<li onClick={this.openProfile.bind(this, donor)} key={donor}>{donor.general.firstName}</li>)})}
     </div>
   )
 }
