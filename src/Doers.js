@@ -13,7 +13,7 @@ class Doers extends Component {
             details: '',
             contact: '',
             open: false,
-            doerResult: ''
+            doerResult: []
 
         }
     }
@@ -25,7 +25,7 @@ class Doers extends Component {
                 this.setState({
                     doers: data
                 })
-                console.log(data)
+                console.log('data from firebase ', data)
             }
         })
     }
@@ -46,11 +46,11 @@ class Doers extends Component {
         const search = this.searchDoer.value
         console.log(search)
         const mapDoer = this.state.doers.map(doer => {
-            return (doer.general.firstName)
+            return (doer)
         })
         console.log('your doers are ', mapDoer)
         const doer = mapDoer.filter(doer => {
-            return (doer == `${search}`)
+            return (doer.general.firstName == `${search}`)
         })
         console.log('your search result is ', doer)
         if (doer == '') {
@@ -61,6 +61,9 @@ class Doers extends Component {
             })
         }
         this.searchDoer.value = ''
+    }
+    openSearchDoer(user){
+      console.log('searched user is ', user)
     }
   render (){
   const actions = [
@@ -100,12 +103,16 @@ class Doers extends Component {
         <h3> Contact Information </h3>
         {this.state.contact}
         </Dialog>
-      <h1>{this.state.doerResult}</h1>
+        {this.state.doerResult.map(doer=>{
+          return (<li onClick={this.openProfile.bind(this, doer)} key={doer}>{doer.general.firstName}</li>)
+        })}
     </div>
   )
 }
 
 
 }
+
+
 
 export default Doers

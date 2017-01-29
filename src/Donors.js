@@ -14,7 +14,7 @@ class Donors extends Component {
       details: '',
       contact: '',
       open: false,
-      donorResult: ''
+      donorResult: []
     }
   }
 
@@ -36,11 +36,11 @@ searchADonor = () => {
     const search = this.searchDonor.value
     console.log(search)
     const mapDonor = this.state.donors.map(donor => {
-        return (donor.general.firstName)
+        return (donor)
     })
     console.log('your donors are ', mapDonor)
     const donor = mapDonor.filter(donor => {
-        return (donor == `${search}`)
+        return (donor.general.firstName == `${search}`)
     })
     console.log('your search result is ', donor)
     if (donor == '') {
@@ -63,8 +63,6 @@ openProfile(user){
     contact: `Email: ${user.contact.email} Phone: ${user.contact.phone} Website: ${user.contact.website}`,
     open: true
   })
-  this.props.router.push(`/${this.state.name}`)
-  this.props.pickles(user)
 }
 
 render (){
@@ -106,7 +104,8 @@ render (){
         <h3> Contact Information </h3>
         {this.state.contact}
         </Dialog>
-        <h1>{this.state.donorResult}</h1>
+        {this.state.donorResult.map(donor=>{
+          return(<li onClick={this.openProfile.bind(this, donor)} key={donor}>{donor.general.firstName}</li>)})}
     </div>
   )
 }
