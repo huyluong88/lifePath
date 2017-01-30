@@ -3,6 +3,7 @@ import base  from './config';
 import Dialog from 'material-ui/Dialog';
 import { withRouter } from 'react-router';
 import FlatButton from 'material-ui/FlatButton';
+import { Link } from 'react-router'
 
 class Doers extends Component {
     constructor() {
@@ -25,23 +26,11 @@ class Doers extends Component {
                 this.setState({
                     doers: data
                 })
-                console.log('data from firebase ', data)
+                console.log(data)
             }
         })
     }
-    openProfile(user) {
-        console.log(user)
-        this.setState({
-            name: `${user.general.firstName} ${user.general.lastName}`,
-            details: `Type of Entity: ${user.general.toE} Industry: ${user.general.industry} Awards: ${user.general.award}`,
-            contact: `Email: ${user.contact.email} Phone: ${user.contact.phone} Website: ${user.contact.website}`,
-            open: true
-        })
-    }
 
-    handleClose = () => this.setState({
-        open: !this.state.open
-    });
     searchADoer = () => {
         const search = this.searchDoer.value
         console.log(search)
@@ -66,13 +55,6 @@ class Doers extends Component {
       console.log('searched user is ', user)
     }
   render (){
-  const actions = [
-    <FlatButton
-      label="Close"
-      primary={true}
-      onClick={this.handleClose}
-    />
-  ];
 
   return(
     <div>
@@ -82,30 +64,16 @@ class Doers extends Component {
         primary={true}
         onClick={this.searchADoer}
       />
+      {this.state.doerResult.map(doer=>{
+        return (<li onClick={this.openProfile.bind(this, doer)} key={doer}>{doer.general.firstName}</li>)
+      })}
 
       <ul>
         {this.state.doers.map((doer, index) => {
-          return (<li onClick={this.openProfile.bind(this, doer)} key={index}> {doer.general.firstName} {doer.general.lastName}</li>)
+          return (<li> <Link key={index} to={`/doers/${index}`}>{doer.general.firstName} {doer.general.lastName}</Link></li>)
         })}
       </ul>
-      <Dialog
-          title="Doer Information"
-          actions={actions}
-          open={this.state.open}
-          autoScrollBodyContent={true}
-        >
-        <h3> Name </h3>
-        {this.state.name}
 
-        <h3>Details</h3>
-        {this.state.details}
-
-        <h3> Contact Information </h3>
-        {this.state.contact}
-        </Dialog>
-        {this.state.doerResult.map(doer=>{
-          return (<li onClick={this.openProfile.bind(this, doer)} key={doer}>{doer.general.firstName}</li>)
-        })}
     </div>
   )
 }

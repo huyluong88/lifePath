@@ -26,7 +26,6 @@ componentDidMount(){
       this.setState ({
         donors: data
       })
-      console.log(data)
     }
   })
 }
