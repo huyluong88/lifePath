@@ -110,6 +110,12 @@ render (){
         <input placeholder="firstName" ref={element => this.firstname = element}/>
         <input placeholder="lastName" ref={element => this.lastname = element}/>
         <input placeholder="toE" ref={element => this.toE = element}/>
+        Type of Entity:
+        <select name='ToE'>
+          <option value='Company'>Company</option>
+          <option value='Foundation'>Foundation</option>
+          <option value='Non-Profit'>Non-Profit</option>
+        </select>
         <input placeholder="industry" ref={element => this.industry = element}/>
         <input placeholder="award" ref={element => this.award = element}/>
 
@@ -126,6 +132,7 @@ render (){
       ref={node => this.password = node}
       placeholder="password"
       type='password' />
+      <input type='file' placeholder='upload a file' />
 
       <RaisedButton label="Submit" primary={true} onClick={this.addDoer.bind(this)}/>
     </section>

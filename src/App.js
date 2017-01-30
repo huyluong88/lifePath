@@ -13,7 +13,6 @@ import Doers from './Doers'
 import Donors from './Donors'
 import AppBar from 'material-ui/AppBar';
 
-
 const style = {
   margin: 12,
 };
@@ -24,13 +23,42 @@ class App extends Component {
     this.state = {
       open: false,
       open2: false,
-      userProfile: ''
+      userProfile: '',
+      userName: '',
+      name: ''
     }
   }
   handleToggle = () => this.setState({open: !this.state.open});
   handleToggle2 = () => this.setState({open2: !this.state.open2});
+  logIn() {
+      base.authWithPassword({
+          email: this.email.value,
+          password: this.password.value
+      }, this.authStateChanged.bind(this)).catch(err => console.error(err))
+  }
+  logOut() {
+    this.setState({
+        userName: ''
+    })
+    base.unauth()
+}
 
+  authStateChanged(error, user) {
+      if (error) {
+          alert('wrong password')
+      } else if (user) {
+          console.log('auth state changed ', user)
+          this.setState({
+              userName: user.email
+          })
+      }
+  }
 
+openProfile(doer){
+  this.setState({
+    name: doer.general.firstName
+  })
+}
 
 
 
@@ -44,13 +72,35 @@ class App extends Component {
             <img src= { pic }/>
             </div>
           </header>
+          <form hidden={this.state.userName}>
+            <button
+              type="submit"
+              onClick={this.logIn.bind(this)}>Log In</button>
+              <input
+              ref={node => this.email = node}
+              placeholder="email" />
+              <input
+              ref={node => this.password = node}
+              placeholder="password"
+              type='password' />
+            </form>
+            <button
+              hidden={!this.state.userName}
+              type="submit"
+              onClick={this.logIn.bind(this)}>Log out</button>
+
+            {this.state.userName}
           <div className="utilities">
+
+
             <RaisedButton label="Doers" primary={true} style={style} className="buttons"
               onClick={this.handleToggle}/>
 
               <Drawer open={this.state.open}>
                 <AppBar showMenuIconButton={false} title="Doers" />
-                  <Doers/>
+                  <Doers
+                  onChange={this.openProfile.bind(this)}
+                  />
 
               </Drawer>
 
@@ -71,7 +121,7 @@ class App extends Component {
             </Link>
 
           </div>
-
+          {this.state.name}
           <footer>
           </footer>
         </div>
