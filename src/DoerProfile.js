@@ -26,8 +26,8 @@ class DoerProfile extends Component {
 render (){
   return (
     <div>
-    {this.state.name.map (first => {
-      return (<p>{first.firstName}</p>)
+    {this.state.name.map (doer => {
+      return (<p>{doer.firstName} {doer.lastName}</p> )
     })}
     </div>
   )
