@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import base  from './config';
-import Dialog from 'material-ui/Dialog';
 import { withRouter } from 'react-router';
 import FlatButton from 'material-ui/FlatButton';
 import { Link } from 'react-router'
+import DoerProfile from './DoerProfile'
 
 class Doers extends Component {
     constructor() {
@@ -54,6 +54,9 @@ class Doers extends Component {
     openSearchDoer(user){
       console.log('searched user is ', user)
     }
+    openProfile2(doer){
+      this.props.onChange(doer)
+    }
   render (){
 
   return(
@@ -64,16 +67,14 @@ class Doers extends Component {
         primary={true}
         onClick={this.searchADoer}
       />
-      {this.state.doerResult.map(doer=>{
-        return (<li onClick={this.openProfile.bind(this, doer)} key={doer}>{doer.general.firstName}</li>)
-      })}
-
       <ul>
         {this.state.doers.map((doer, index) => {
-          return (<li> <Link key={index} to={`/doers/${index}`}>{doer.general.firstName} {doer.general.lastName}</Link></li>)
+          return (<li onClick={this.openProfile2.bind(this, doer)} key={index}> <Link to ={`/doers/${index}`}>{doer.general.firstName} {doer.general.lastName}</Link></li>)
         })}
       </ul>
-
+        {this.state.doerResult.map(doer=>{
+          return (<li onClick={this.openProfile.bind(this, doer)} key={doer}>{doer.general.firstName}</li>)
+        })}
     </div>
   )
 }
