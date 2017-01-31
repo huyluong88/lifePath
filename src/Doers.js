@@ -26,23 +26,11 @@ class Doers extends Component {
                 this.setState({
                     doers: data
                 })
-                console.log('data from firebase ', data)
+                console.log(data)
             }
         })
     }
-    openProfile(user) {
-        console.log(user)
-        this.setState({
-            name: `${user.general.firstName} ${user.general.lastName}`,
-            details: `Type of Entity: ${user.general.toE} Industry: ${user.general.industry} Awards: ${user.general.award}`,
-            contact: `Email: ${user.contact.email} Phone: ${user.contact.phone} Website: ${user.contact.website}`,
-            open: true
-        })
-    }
 
-    handleClose = () => this.setState({
-        open: !this.state.open
-    });
     searchADoer = () => {
         const search = this.searchDoer.value
         console.log(search)
@@ -70,13 +58,6 @@ class Doers extends Component {
       this.props.onChange(doer)
     }
   render (){
-  const actions = [
-    <FlatButton
-      label="Close"
-      primary={true}
-      onClick={this.handleClose}
-    />
-  ];
 
   return(
     <div>
@@ -86,7 +67,6 @@ class Doers extends Component {
         primary={true}
         onClick={this.searchADoer}
       />
-
       <ul>
         {this.state.doers.map((doer, index) => {
           return (<li onClick={this.openProfile2.bind(this, doer)} key={index}> <Link to ={`/doers/${index}`}>{doer.general.firstName} {doer.general.lastName}</Link></li>)

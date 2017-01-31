@@ -1,5 +1,5 @@
 {
-    "roles": ["Doers", "Donors"],
+    "roles": ["doers", "donors"],
     "doers": [{
             "general": {
                 "firstName": "Alex",
