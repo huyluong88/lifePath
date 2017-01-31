@@ -6,6 +6,7 @@ import './index.css';
 import DoerSignUp from './DoerSignUp';
 import DonorSignUp from './DonorSignUp';
 import DoerProfile from './DoerProfile';
+import selfProfile from './selfProfile';
 
 ReactDOM.render(
   <Router history={hashHistory}>
@@ -14,6 +15,7 @@ ReactDOM.render(
   <Route path="/doers/:name" component={DoerProfile}/>
   <Route path="/DonorSignUp" component={DonorSignUp}/>
   <Route path="/doers/:name" component={DoerProfile}/>
+  <Route path="/selfProfile" component={selfProfile}/>
 </Router>,
   document.getElementById('root')
 );
