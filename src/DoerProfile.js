@@ -26,9 +26,55 @@ class DoerProfile extends Component {
 render (){
   return (
     <div>
+    <h2>Doer Name</h2>
     {this.state.name.map (doer => {
-      return (<p>{doer.firstName} {doer.lastName}</p> )
-    })}
+      return (
+        <p>{doer.firstName} {doer.lastName}</p>)
+      })}
+    <h2>Details</h2>
+      <strong>Type of Entity:</strong>
+        {this.state.name.map (doer => {
+          return (
+            <span> {doer.toE}</span>
+          )
+        })}<br/>
+
+      <strong>Industry:</strong>
+      {this.state.name.map (doer => {
+        return (
+          <span> {doer.industry}</span>
+        )
+      })}<br/>
+
+      <strong>Award:</strong>
+      {this.state.name.map (doer => {
+        return (
+          <span> {doer.award}</span>
+        )
+      })}
+
+    <h2>Purpose</h2>
+      <strong>Our Story: </strong>
+      {this.state.name.map (doer => {
+        return (
+          <span> {doer.ourStory} </span>
+        )
+      })}<br/>
+
+      <strong>Focus/Mission: </strong>
+      {this.state.name.map (doer => {
+        return (
+          <span> {doer.focusMission} </span>
+        )
+      })}<br/>
+
+      <strong>niche</strong>
+      {this.state.name.map (doer => {
+        return (
+          <span> {doer.niche} </span>
+        )
+      })}
+
     </div>
   )
   }
