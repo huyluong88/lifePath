@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import base from './config';
 
-class DoerProfile extends Component {
+class DonorProfile extends Component {
   constructor () {
     super()
     this.state = {
@@ -11,7 +11,7 @@ class DoerProfile extends Component {
   }
 
   componentDidMount () {
-  base.fetch(`/doers/${this.props.params.name}`, {
+  base.fetch(`/donors/${this.props.params.name}`, {
     context: this,
     asArray: true,
     then: (data) => {
@@ -27,73 +27,80 @@ render (){
   return (
     <div>
     <h2>Name</h2>
-    {this.state.name.map (doer => {
+    {this.state.name.map (donor => {
       return (
-        <p>{doer.firstName} {doer.lastName}</p>)
+        <p>{donor.firstName} {donor.lastName}</p>)
       })}
     <h2>Details</h2>
       <strong>Type of Entity:</strong>
-        {this.state.name.map (doer => {
+        {this.state.name.map (donor => {
           return (
-            <span> {doer.toE}</span>
+            <span> {donor.toE}</span>
           )
         })}<br/>
 
       <strong>Industry:</strong>
-      {this.state.name.map (doer => {
+      {this.state.name.map (donor => {
         return (
-          <span> {doer.industry}</span>
+          <span> {donor.industry}</span>
+        )
+      })}<br/>
+
+      <strong>Interest: </strong>
+      {this.state.name.map (donor => {
+        return (
+          <span> {donor.interest}</span>
         )
       })}<br/>
 
       <strong>Award:</strong>
-      {this.state.name.map (doer => {
+      {this.state.name.map (donor => {
         return (
-          <span> {doer.award}</span>
+          <span> {donor.award}</span>
         )
       })}
 
     <h2>Purpose</h2>
       <strong>Our Story: </strong>
-      {this.state.name.map (doer => {
+      {this.state.name.map (donor => {
         return (
-          <span> {doer.ourStory} </span>
+          <span> {donor.ourStory} </span>
         )
       })}<br/>
 
       <strong>Focus/Mission: </strong>
-      {this.state.name.map (doer => {
+      {this.state.name.map (donor => {
         return (
-          <span> {doer.focusMission} </span>
+          <span> {donor.focusMission} </span>
         )
       })}<br/>
 
       <strong>niche: </strong>
-      {this.state.name.map (doer => {
+      {this.state.name.map (donor => {
         return (
-          <span> {doer.niche} </span>
+          <span> {donor.niche} </span>
         )
       })}
 
       <h2>Contact Information</h2>
         <strong>email: </strong>
-        {this.state.name.map (doer => {
+        {this.state.name.map (donor => {
           return (
-            <span>  {doer.email}</span>
+            <span>  {donor.email}</span>
           )
         })} <br/>
 
         <strong>phone: </strong>
-        {this.state.name.map (doer => {
+        {this.state.name.map (donor => {
           return (
-            <span>  {doer.phone}</span>
+            <span>  {donor.phone}</span>
           )
         })} <br/>
 
         <strong>website: </strong>
-        {this.state.name.map (doer => {
+        {this.state.name.map (donor => {
           return (
-            <span>  {doer.website}</span>
+            <span>  {donor.website}</span>
           )
         })}
 
@@ -101,4 +108,4 @@ render (){
   )
   }
 }
-export default DoerProfile
+export default DonorProfile

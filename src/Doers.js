@@ -67,14 +67,14 @@ class Doers extends Component {
         primary={true}
         onClick={this.searchADoer}
       />
+      {this.state.doerResult.map(doer=>{
+        return (<span onClick={this.openProfile.bind(this, doer)} key={doer}>{doer.general.firstName}</span>)
+      })}
       <ul>
         {this.state.doers.map((doer, index) => {
-          return (<li onClick={this.openProfile2.bind(this, doer)} key={index}> <Link to ={`/doers/${index}`}>{doer.general.firstName} {doer.general.lastName}</Link></li>)
+          return (<li key={index}> <Link to ={`/doers/${index}`}>{doer.general.firstName} {doer.general.lastName}</Link></li>)
         })}
       </ul>
-        {this.state.doerResult.map(doer=>{
-          return (<li onClick={this.openProfile.bind(this, doer)} key={doer}>{doer.general.firstName}</li>)
-        })}
     </div>
   )
 }
