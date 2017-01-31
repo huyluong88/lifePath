@@ -72,6 +72,7 @@ openProfile(doer){
             <img src= { pic }/>
             </div>
           </header>
+          <Link to="/selfProfile">Your profile</Link>
           <form hidden={this.state.userName}>
             <button
               type="submit"
