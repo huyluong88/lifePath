@@ -38,7 +38,7 @@ searchADonor = () => {
     })
     console.log('your donors are ', mapDonor)
     const donor = mapDonor.filter(donor => {
-        return (donor.general.firstName == `${search}`)
+        return (donor.general.firstName == `${search}` || donor.general.lastName == `${search}` || donor.contact.email == `${search}`)
     })
     console.log('your search result is ', donor)
     if (donor == '') {
@@ -49,7 +49,13 @@ searchADonor = () => {
         })
     }
     this.searchDonor.value = ''
-}
+  }
+  openSearchDoer(user){
+    console.log('searched user is ', user)
+  }
+  openProfile2(doer){
+    this.props.onChange(doer)
+  }
 
 
 render (){
@@ -63,7 +69,7 @@ render (){
       onClick={this.searchADonor}
     />
     {this.state.donorResult.map(donor=>{
-      return(<li onClick={this.openProfile.bind(this, donor)} key={donor}>{donor.general.firstName}</li>)})}
+      return(<li><Link to ={`/donors/${donor.key}`}>{donor.general.firstName} {donor.general.lastName}</Link></li>)})}
 
       <ul>
         {this.state.donors.map((donor, index) => {

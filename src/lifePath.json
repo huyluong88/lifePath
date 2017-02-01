@@ -35,13 +35,61 @@
                     "smartGoals": "string",
                     "dateSet": "Nov-5",
                     "endDate": "Feb-13",
-                    "goalMet": "true"
+                    "goalMet": "yes"
+                },
+                {
+                    "category": "Funds",
+                    "owner": "strings",
+                    "smartGoals": "string",
+                    "dateSet": "Nov-5",
+                    "endDate": "Feb-13",
+                    "goalMet": "yes"
+                },
+                {
+                    "category": "Fundsz",
+                    "owner": "stringo",
+                    "smartGoals": "string",
+                    "dateSet": "Nov-5",
+                    "endDate": "Feb-13",
+                    "goalMet": "NO!!!!!"
+                },
+                {
+                    "category": "Fundssss",
+                    "owner": "stringz",
+                    "smartGoals": "string",
+                    "dateSet": "Nov-5",
+                    "endDate": "Feb-13",
+                    "goalMet": "no"
                 }],
                 "weeklyScore": [{
-                    "category": "String",
-                    "owner": "String",
-                    "measurable": "String",
-                    "goal": "string",
+                    "category": "Strings",
+                    "owner": "Strings",
+                    "measurable": "Strings",
+                    "goal": "strings",
+                    "weekbegin": "datestarted",
+                    "weekEnd": "dateend"
+                },
+                {
+                    "category": "Stringss",
+                    "owner": "Stringss",
+                    "measurable": "Stringss",
+                    "goal": "stringss",
+                    "weekbegin": "datestarted",
+                    "weekEnd": "dateend"
+                },
+                {
+                    "category": "Stringsss",
+                    "owner": "Stringsss",
+                    "measurable": "Stringsss",
+                    "goal": "stringsss",
+                    "weekbegin": "datestarted",
+                    "weekEnd": "dateend"
+                },
+                {
+                    "category": "Stringz",
+                    "owner": "Stringz",
+                    "measurable": "Stringz",
+                    "goal": "stringz",
                     "weekbegin": "datestarted",
                     "weekEnd": "dateend"
                 }],
@@ -49,6 +97,14 @@
                     "category": "String",
                     "owner": "String",
                     "smartGoals": "String",
+                    "dateSet": "datestarted",
+                    "endDate": "dateend",
+                    "goalMet": "boolean"
+                },
+                {
+                    "category": "Strineg",
+                    "owner": "Strineg",
+                    "smartGoals": "Strineg",
                     "dateSet": "datestarted",
                     "endDate": "dateend",
                     "goalMet": "boolean"
