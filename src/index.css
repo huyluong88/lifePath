@@ -1,46 +1,91 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
 }
 
-header{
-  display: flex;
+header {
+    display: flex;
 }
 
 li {
-  list-style: none;
+    list-style: none;
 }
 
 .back {
-  width: 100%;
-  filter: blur(1px);
-  height: 15em;
+    width: 100%;
+    filter: blur(1px);
+    height: 15em;
 }
 
 .logo {
-  margin: 0 auto;
+    margin: 0 auto;
 }
 
 img {
-  height: 10em;
+    height: 10em;
 }
 
 .utilities {
-  text-align: center;
-  display: flex;
-  width: 30%;
-  margin: auto;
+    text-align: center;
+    display: flex;
+    width: 30%;
+    margin: auto;
 }
 
 .buttons {
-  width: 9em;
+    width: 9em;
 }
 
-
 .signUp {
-  text-align: center;
-  display: flex;
-  width: 30%;
-  margin: auto;
+    text-align: center;
+    display: flex;
+    width: 30%;
+    margin: auto;
+}
+
+.tg {
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-color: #aabcfe;
+}
+
+.tg td {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    padding: 10px 5px;
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    word-break: normal;
+    border-color: #aabcfe;
+    color: #669;
+    background-color: #e8edff;
+}
+
+.tg th {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 10px 5px;
+    border-style: solid;
+    border-width: 1px;
+    overflow: hidden;
+    word-break: normal;
+    border-color: #aabcfe;
+    color: #039;
+    background-color: #b9c9fe;
+}
+
+.tg .tg-yw4l {
+    vertical-align: top
+}
+
+.tg .tg-6k2t {
+    background-color: #D2E4FC;
+    vertical-align: top
+}
+
+.trialdos {
+  background-color: gray;
 }

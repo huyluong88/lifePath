@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import base  from './config';
-import Dialog from 'material-ui/Dialog';
 import { withRouter } from 'react-router';
 import FlatButton from 'material-ui/FlatButton';
-
+import { Link } from 'react-router'
+import DonorProfile from './DonorProfile'
 
 class Donors extends Component {
   constructor(){
@@ -30,7 +30,6 @@ componentDidMount(){
   })
 }
 
-handleClose = () => this.setState({open: !this.state.open});
 searchADonor = () => {
     const search = this.searchDonor.value
     console.log(search)
@@ -39,7 +38,7 @@ searchADonor = () => {
     })
     console.log('your donors are ', mapDonor)
     const donor = mapDonor.filter(donor => {
-        return (donor.general.firstName == `${search}`)
+        return (donor.general.firstName == `${search}` || donor.general.lastName == `${search}` || donor.contact.email == `${search}`)
     })
     console.log('your search result is ', donor)
     if (donor == '') {
@@ -50,29 +49,16 @@ searchADonor = () => {
         })
     }
     this.searchDonor.value = ''
-}
+  }
+  openSearchDoer(user){
+    console.log('searched user is ', user)
+  }
+  openProfile2(doer){
+    this.props.onChange(doer)
+  }
 
-
-openProfile(user){
-  console.log(user)
-  this.setState({
-    name: `${user.general.firstName} ${user.general.lastName}`,
-    details: `Type of Entity: ${user.general.toE} Industry: ${user.general.industry}
-              Interest: ${user.general.interest} Awards: ${user.general.award}`,
-    contact: `Email: ${user.contact.email} Phone: ${user.contact.phone} Website: ${user.contact.website}`,
-    open: true
-  })
-}
 
 render (){
-
-  const actions = [
-    <FlatButton
-      label="Close"
-      primary={true}
-      onClick={this.handleClose}
-    />
-  ];
 
   return(
     <div>
@@ -82,29 +68,15 @@ render (){
       primary={true}
       onClick={this.searchADonor}
     />
+    {this.state.donorResult.map(donor=>{
+      return(<li><Link to ={`/donors/${donor.key}`}>{donor.general.firstName} {donor.general.lastName}</Link></li>)})}
 
       <ul>
         {this.state.donors.map((donor, index) => {
-          return (<li onClick={this.openProfile.bind(this, donor)} key={index}> {donor.general.firstName} {donor.general.lastName}</li>)
+          return (<li key={index}> <Link to ={`/donors/${index}`}>{donor.general.firstName} {donor.general.lastName}</Link></li>)
         })}
       </ul>
-      <Dialog
-          title="Donor Information"
-          actions={actions}
-          open={this.state.open}
-          autoScrollBodyContent={true}
-        >
-        <h3> Name </h3>
-        {this.state.name}
 
-        <h3>Details</h3>
-        {this.state.details}
-
-        <h3> Contact Information </h3>
-        {this.state.contact}
-        </Dialog>
-        {this.state.donorResult.map(donor=>{
-          return(<li onClick={this.openProfile.bind(this, donor)} key={donor}>{donor.general.firstName}</li>)})}
     </div>
   )
 }

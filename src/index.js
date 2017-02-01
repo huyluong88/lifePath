@@ -6,6 +6,7 @@ import './index.css';
 import DoerSignUp from './DoerSignUp';
 import DonorSignUp from './DonorSignUp';
 import DoerProfile from './DoerProfile';
+import DonorProfile from './DonorProfile'
 import selfProfile from './selfProfile';
 
 ReactDOM.render(
@@ -14,6 +15,7 @@ ReactDOM.render(
   <Route path="/DoerSignUp" component={DoerSignUp}/>
   <Route path="/doers/:name" component={DoerProfile}/>
   <Route path="/DonorSignUp" component={DonorSignUp}/>
+  <Route path="/donors/:name" component={DonorProfile}/>
   <Route path="/doers/:name" component={DoerProfile}/>
   <Route path="/selfProfile" component={selfProfile}/>
 </Router>,

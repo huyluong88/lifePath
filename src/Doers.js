@@ -10,12 +10,8 @@ class Doers extends Component {
         super()
         this.state = {
             doers: [],
-            name: '',
-            details: '',
-            contact: '',
             open: false,
             doerResult: []
-
         }
     }
     componentDidMount() {
@@ -39,7 +35,9 @@ class Doers extends Component {
         })
         console.log('your doers are ', mapDoer)
         const doer = mapDoer.filter(doer => {
-            return (doer.general.firstName == `${search}`)
+            return (doer.general.firstName == `${search}` ||
+                doer.general.lastName == `${search}` ||
+                doer.contact.email == `${search}`)
         })
         console.log('your search result is ', doer)
         if (doer == '') {
@@ -51,12 +49,7 @@ class Doers extends Component {
         }
         this.searchDoer.value = ''
     }
-    openSearchDoer(user){
-      console.log('searched user is ', user)
-    }
-    openProfile2(doer){
-      this.props.onChange(doer)
-    }
+
   render (){
 
   return(
@@ -67,21 +60,28 @@ class Doers extends Component {
         primary={true}
         onClick={this.searchADoer}
       />
+
+      {this.state.doerResult.map((doer)=>{
+        return (<li>
+                <Link to ={`/doers/${doer.key}`}>
+                {doer.general.firstName} {doer.general.lastName}
+                </Link>
+                </li>)
+              })
+      }
       <ul>
         {this.state.doers.map((doer, index) => {
-          return (<li onClick={this.openProfile2.bind(this, doer)} key={index}> <Link to ={`/doers/${index}`}>{doer.general.firstName} {doer.general.lastName}</Link></li>)
-        })}
+          return (<li key={index}>
+                  <Link to ={`/doers/${index}`}>
+                  {doer.general.firstName} {doer.general.lastName}
+                  </Link>
+                  </li>)
+                })
+        }
       </ul>
-        {this.state.doerResult.map(doer=>{
-          return (<li onClick={this.openProfile.bind(this, doer)} key={doer}>{doer.general.firstName}</li>)
-        })}
     </div>
   )
 }
-
-
 }
-
-
 
 export default Doers
