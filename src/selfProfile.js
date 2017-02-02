@@ -91,6 +91,14 @@ if(error){
        })
       }
 }
+handleEdit(e){
+if(e.keyCode === 13){
+  const toe = this.test.value
+  this.setState({
+    award: toe
+  })
+}
+}
 render (){
   console.log("self data is", this.state.doer)
   return (
@@ -112,12 +120,13 @@ render (){
         type="submit"
         onClick={this.logOut.bind(this)}>Log out</button>
       <div hidden={!this.state.userName}>
+      <input ref={node => this.test = node} />
           <h2>Name</h2>
             <p>{this.state.firstName} {this.state.lastName}</p>
           <h2>Details</h2>
             <strong>Type of Entity: </strong><span>{this.state.toE}</span><br/>
             <strong>Industry: </strong><span>{this.state.industry}</span><br/>
-            <strong>Award: </strong><span>{this.state.award}</span>
+            <strong>Award: </strong><span contentEditable= {true} onKeyUp={this.handleEdit.bind(this)}>{this.state.award}</span>
           <h2>Purpose</h2>
             <strong>Our Story: </strong><span>{this.state.ourStory}</span><br/>
             <strong>Focus/Mission: </strong><span>{this.state.focusMission}</span><br/>
@@ -138,12 +147,12 @@ render (){
                      <th className="tg-yw4l">Goal Met</th>
                    </tr>
                    <tr>
-                   <td className="tg-6k2t">
+                   <td className="tg-6k2t" contentEditable={true}>
                      {this.state.ninetydayGoals.map (stuff => {
-                       return (<tr >{stuff.category}</tr>)
+                       return (<tr>{stuff.category}</tr>)
                      })}
                    </td>
-                   <td className="tg-6k2t">
+                   <td className="tg-6k2t" contentEditable={true}>
                      {this.state.ninetydayGoals.map (stuff => {
                        return (<tr >{stuff.owner}</tr>)
                      })}
@@ -170,7 +179,6 @@ render (){
                    </td>
                    </tr>
                   </table><br/>
-
                   <strong>Weekly Score</strong>
                   <table className="tg">
                    <tr>
@@ -214,7 +222,6 @@ render (){
                    </td>
                    </tr>
                   </table><br/>
-
                   <strong>1 and 3 Year Goal</strong>
                   <table className="tg">
                    <tr>
@@ -258,7 +265,6 @@ render (){
                    </td>
                    </tr>
                   </table>
-
             </div>
     </div>
   )
