@@ -52,6 +52,7 @@ addDoer() {
                 phone: this.phone.value,
                 website: this.website.value
             },
+            key: this.state.doers.length,
             performance: {
                 ninetydayGoals: [{
                     category: this.category.value,
