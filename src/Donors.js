@@ -73,7 +73,7 @@ render (){
 
       <ul>
         {this.state.donors.map((donor, index) => {
-          return (<li key={index}> <Link to ={`/donors/${index}`}>{donor.general.firstName} {donor.general.lastName}</Link></li>)
+          return (<li key={index}> <Link to ={`/donors/${donor.key}`}>{donor.general.firstName} {donor.general.lastName}</Link></li>)
         })}
       </ul>
 

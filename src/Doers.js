@@ -15,7 +15,7 @@ class Doers extends Component {
         }
     }
     componentDidMount() {
-        base.fetch('doers', {
+            base.fetch('doers', {
             context: this,
             asArray: true,
             then: (data) => {
@@ -72,7 +72,7 @@ class Doers extends Component {
       <ul>
         {this.state.doers.map((doer, index) => {
           return (<li key={index}>
-                  <Link to ={`/doers/${index}`}>
+                  <Link to ={`/doers/${doer.key}`}>
                   {doer.general.firstName} {doer.general.lastName}
                   </Link>
                   </li>)

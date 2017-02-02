@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import base from './config';
 import './index.css';
-
 class DoerProfile extends Component {
   constructor () {
     super()
@@ -24,7 +23,6 @@ class DoerProfile extends Component {
       yearand3years: []
     }
   }
-
   componentDidMount () {
   base.fetch(`/doers/${this.props.params.name}`, {
     context: this,
@@ -50,44 +48,23 @@ class DoerProfile extends Component {
     }
   })
 }
-
 render (){
   return (
     <div>
     <h2>Name</h2>
       <p>{this.state.firstName} {this.state.lastName}</p>
-
     <h2>Details</h2>
       <strong>Type of Entity: </strong><span>{this.state.toE}</span><br/>
-
-
       <strong>Industry: </strong><span>{this.state.industry}</span><br/>
-
-
       <strong>Award: </strong><span>{this.state.award}</span>
-
-
     <h2>Purpose</h2>
       <strong>Our Story: </strong><span>{this.state.ourStory}</span><br/>
-
-
       <strong>Focus/Mission: </strong><span>{this.state.focusMission}</span><br/>
-
-
       <strong>niche: </strong><span>{this.state.niche}</span>
-
-
       <h2>Contact Information</h2>
         <strong>email: </strong><span>{this.state.email}</span><br/>
-
-
         <strong>phone: </strong><span>{this.state.phone}</span><br/>
-
-
         <strong>website: </strong><span>{this.state.website}</span><br/>
-
-
-
         <h2>Performance</h2>
           <strong>90 Day Goals</strong>
             <table className="tg">
@@ -132,7 +109,6 @@ render (){
              </td>
              </tr>
             </table><br/>
-
             <strong>Weekly Score</strong>
             <table className="tg">
              <tr>
@@ -176,7 +152,6 @@ render (){
              </td>
              </tr>
             </table><br/>
-
             <strong>1 and 3 Year Goal</strong>
             <table className="tg">
              <tr>
@@ -220,10 +195,9 @@ render (){
              </td>
              </tr>
             </table>
-
-
     </div>
   )
   }
 }
 export default DoerProfile
+/////// `doers/${doer[0].key}`///////

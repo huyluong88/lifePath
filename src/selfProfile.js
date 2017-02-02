@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import base from './config';
 import './index.css';
-
 class selfProfile extends Component {
   constructor () {
     super()
     this.state = {
-      name: {},
+      doers:[],
+      doer: {},
       userName: '',
       firstName: '',
       lastName: '',
@@ -25,40 +25,23 @@ class selfProfile extends Component {
       yearand3years: []
     }
   }
-
   componentDidMount () {
-  base.syncState(`/doers/${this.props.params.name}`, {
+  base.fetch('doers', {
     context: this,
     then: (data) => {
+      console.log("data is", data)
       this.setState({
-        name: data,
-        firstName: data.general.firstName,
-        lastName: data.general.lastName,
-        toE: data.general.toE,
-        industry: data.general.industry,
-        award: data.general.award,
-        ourStory: data.purpose.ourStory,
-        focusMission: data.purpose.focusMission,
-        niche: data.purpose.niche,
-        email: data.contact.email,
-        phone: data.contact.phone,
-        website: data.contact.website,
-        ninetydayGoals: data.performance.ninetydayGoals,
-        weeklyScore: data.performance.weeklyScore,
-        yearand3years: data.performance.yearand3years
+        doers: data
       })
-      console.log("what is", data)
     }
   })
 }
-
 logIn() {
     base.authWithPassword({
         email: this.email.value,
         password: this.password.value
     }, this.authStateChanged.bind(this)).catch(err => console.error(err))
 }
-
 logOut() {
   this.setState({
       userName: ''
@@ -67,25 +50,51 @@ logOut() {
   this.email.value = '',
   this.password.value = ''
 }
-
 authStateChanged(error, user) {
-    if (error) {
-        alert('wrong password')
-    } else if (user) {
-        console.log('auth state changed ', user)
-        this.setState({
-            userName: user.email
+console.log('error is ', error)
+console.log('user is ', user)
+if(error){
+  alert('wrong password')
+} else if(user){
+  //fetch data in componentDidMount and store it in an Array
+  //get email value from login user
+  //filter email value against the Array to retrieve the key?
+  //finally use that key to syncState with firebase?
+        console.log('user is ', user.email)
+        const doerEmail = user.email
+        const doer = this.state.doers.filter(doer=>{
+          return (doer.contact.email == `${doerEmail}`)
         })
-    }
+        console.log('matched email is ', doer[0].key)
+        base.syncState(`/doers/${doer[0].key}`,{
+          context: this,
+           state: 'doer',
+           then: (doer) => {
+            this.setState ({
+             userName: this.email.value,
+             firstName: this.state.doer.general.firstName,
+             lastName: this.state.doer.general.lastName,
+             toE: this.state.doer.general.toE,
+             industry: this.state.doer.general.industry,
+             award: this.state.doer.general.award,
+             ourStory: this.state.doer.purpose.ourStory,
+             focusMission: this.state.doer.purpose.focusMission,
+             niche: this.state.doer.purpose.niche,
+             email: this.state.doer.contact.email,
+             phone: this.state.doer.contact.phone,
+             website: this.state.doer.contact.website,
+             ninetydayGoals: this.state.doer.performance.ninetydayGoals,
+             weeklyScore: this.state.doer.performance.weeklyScore,
+             yearand3years: this.state.doer.performance.yearand3years
+           })
+         }
+       })
+      }
 }
-
-
 render (){
-
+  console.log("self data is", this.state.doer)
   return (
-
     <div>
-
     <section hidden={this.state.userName}>
       <button
         type="submit"
@@ -102,42 +111,21 @@ render (){
         hidden={!this.state.userName}
         type="submit"
         onClick={this.logOut.bind(this)}>Log out</button>
-
       <div hidden={!this.state.userName}>
           <h2>Name</h2>
             <p>{this.state.firstName} {this.state.lastName}</p>
-
           <h2>Details</h2>
             <strong>Type of Entity: </strong><span>{this.state.toE}</span><br/>
-
-
             <strong>Industry: </strong><span>{this.state.industry}</span><br/>
-
-
             <strong>Award: </strong><span>{this.state.award}</span>
-
-
           <h2>Purpose</h2>
             <strong>Our Story: </strong><span>{this.state.ourStory}</span><br/>
-
-
             <strong>Focus/Mission: </strong><span>{this.state.focusMission}</span><br/>
-
-
             <strong>niche: </strong><span>{this.state.niche}</span>
-
-
             <h2>Contact Information</h2>
               <strong>email: </strong><span>{this.state.email}</span><br/>
-
-
               <strong>phone: </strong><span>{this.state.phone}</span><br/>
-
-
               <strong>website: </strong><span>{this.state.website}</span><br/>
-
-
-
               <h2>Performance</h2>
                 <strong>90 Day Goals</strong>
                   <table className="tg">
@@ -182,7 +170,6 @@ render (){
                    </td>
                    </tr>
                   </table><br/>
-
                   <strong>Weekly Score</strong>
                   <table className="tg">
                    <tr>
@@ -226,7 +213,6 @@ render (){
                    </td>
                    </tr>
                   </table><br/>
-
                   <strong>1 and 3 Year Goal</strong>
                   <table className="tg">
                    <tr>
@@ -271,8 +257,6 @@ render (){
                    </tr>
                   </table>
             </div>
-
-
     </div>
   )
   }
