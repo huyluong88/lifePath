@@ -6,7 +6,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
-
 class DoerSignUp extends Component {
   constructor(){
     super()
@@ -22,7 +21,6 @@ componentDidMount(){
       asArray: true
   })
 }
-
 addDoer() {
     const firstName = this.firstname.value
     const lastName = this.lastname.value
@@ -52,6 +50,7 @@ addDoer() {
                 phone: this.phone.value,
                 website: this.website.value
             },
+            key: this.state.doers.length,
             performance: {
                 ninetydayGoals: [{
                     category: this.category.value,
@@ -92,8 +91,6 @@ addDoer() {
         this.props.router.push('/')
     }
 }
-
-
 render (){
   return(
     <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
@@ -109,12 +106,10 @@ render (){
         </select>
         <input placeholder="industry" ref={element => this.industry = element}/>
         <input placeholder="award" ref={element => this.award = element}/>
-
       <h1>Purpose</h1>
       <input placeholder="ourStory" ref={element => this.ourStory = element}/>
       <input placeholder="focusMission" ref={element => this.focusMission = element}/>
       <input placeholder="niche" ref={element => this.niche = element}/>
-
       <h1>Performance</h1>
         <p><strong>Just One Goal for Each section</strong></p>
           <h3>90 Day Goals</h3>
@@ -138,7 +133,6 @@ render (){
               <option value='Yes'>Yes</option>
               <option value='No'>No</option>
             </select>
-
             <h3>Weekly Scorecard</h3>
             <select ref={element => this.weeklyCategory = element}>
               <option value='Marketing'>Marketing</option>
@@ -155,8 +149,6 @@ render (){
             <input placeholder="Goal" ref={element => this.weeklyGoal = element}/>
             Date Started: <input type="date"  ref={element => this.weeklyDatestart = element}/>
             Date End: <input type="date"  ref={element => this.weeklyDatesend = element}/>
-
-
             <h3>1 and 3 year goals</h3>
             <select ref={element => this.yearCategory = element}>
               <option value='Marketing'>Marketing</option>
@@ -177,13 +169,6 @@ render (){
               <option value='Yes'>Yes</option>
               <option value='No'>No</option>
             </select>
-
-
-
-
-
-
-
       <h1>Contact</h1>
       <input placeholder="email" ref={element => this.email = element}/>
       <input placeholder="phone" ref={element => this.phone = element}/>
@@ -192,15 +177,10 @@ render (){
       ref={node => this.password = node}
       placeholder="password"
       type='password' />
-
       <RaisedButton label="Submit" primary={true} onClick={this.addDoer.bind(this)}/>
     </section>
     </MuiThemeProvider>
-
   )
 }
-
-
 }
-
 export default DoerSignUp
