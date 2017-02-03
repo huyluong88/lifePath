@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import base from './config';
 import './index.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import RaisedButton from 'material-ui/RaisedButton';
+
 class selfProfile extends Component {
   constructor () {
     super()
@@ -22,7 +27,8 @@ class selfProfile extends Component {
       website: '',
       ninetydayGoals: [],
       weeklyScore: [],
-      yearand3years: []
+      yearand3years: [],
+      open: false
     }
   }
   componentDidMount () {
@@ -92,17 +98,16 @@ if(error){
       }
 }
 handleEdit(e){
-if(e.keyCode === 13){
   const toe = this.test.value
   this.setState({
     award: toe
   })
 }
-}
 render (){
   console.log("self data is", this.state.doer)
   return (
     <div>
+    <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
     <section hidden={this.state.userName}>
       <button
         type="submit"
@@ -266,6 +271,8 @@ render (){
                    </tr>
                   </table>
             </div>
+            </MuiThemeProvider>
+
     </div>
   )
   }
