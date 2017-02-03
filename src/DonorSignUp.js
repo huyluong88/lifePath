@@ -23,28 +23,48 @@ componentDidMount(){
 }
 
 addDonor(){
+  const firstName = this.firstname.value
+  const lastName = this.lastname.value
+  const password = this.password.value
+  if (firstName.length === 0 && lastName.length === 0) {
+      alert('enter a first and last name')
+  } else if (firstName.length < 2 && lastName.length < 2) {
+      alert('enter a valid name')
+  } else if (password.length < 6) {
+      alert('password must be 6 or more characters')
+  } else {
   let newDonor = {
     general: { firstName : this.firstname.value, lastName: this.lastname.value, toE: this.toE.value,
                 industry: this.industry.value, interest: this.interest.value, award: this.award.value},
     purpose: { ourStory: this.ourStory.value, focusMission: this.focusMission.value, niche: this.niche.value},
     contact: { email: this.email.value, phone: this.phone.value, website: this.website.value},
+    key: this.state.donors.length,
     employees: {
         employee1: {
-            employee1name: "",
-            employee1pic: ""
+            employee1name: this.employee1f.value,
+            // employee1pic: this.employee2l.value
         },
         employee2: {
-            employee2name: "",
-            employee2pic: ""
+            employee2name: this.employee2f.value,
+            // employee2pic: this.employee2f.value
         }
 
   }
 }
+
   let newDonorsArray = this.state.donors.concat(newDonor)
+  base.createUser({
+      email: this.email.value,
+      password: password
+  }, () => {
+      alert('thanks for signing up!')
+  })
   this.setState({
     donors: newDonorsArray
   })
+
   this.props.router.push('/')
+}
 }
 
 
@@ -70,6 +90,16 @@ render (){
       <input placeholder="email" ref={element => this.email = element}/>
       <input placeholder="phone" ref={element => this.phone = element}/>
       <input placeholder="website" ref={element => this.website = element}/>
+      <input placeholder="employee1 name" ref={element => this.employee1f = element}/>
+
+      <input placeholder="employee2 name" ref={element => this.employee2f = element}/>
+
+
+      <input
+      ref={node => this.password = node}
+      placeholder="password"
+      type='password' />
+
 
       <RaisedButton label="Submit" primary={true} onClick={this.addDonor.bind(this)}/>
     </section>
