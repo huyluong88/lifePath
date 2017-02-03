@@ -39,6 +39,7 @@ class App extends Component {
           </header>
 
           <Link to="/selfProfile">Your profile</Link>
+          <Link to="/donorHome">Donor profile</Link>
 
           <div className="utilities">
             <RaisedButton label="Doers" primary={true} style={style} className="buttons"
