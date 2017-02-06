@@ -2,12 +2,26 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+    background-color: #5b5959;
 }
-
+/*#a5a9af*/
 header {
-    display: flex;
+    /*display: flex;*/
+    /*flex-direction: row;*/
+    /*background-image: url('http://helpthekidsinafrica.weebly.com/uploads/2/9/3/6/29363543/7554705_orig.jpg');*/
+    /*background-repeat: no-repeat;*/
 }
-
+.link {
+  color: white;
+  text-decoration: none;
+  /*display: flex;
+  justify-content: space-between;*/
+  padding: 1em;
+  font-size: 1.1em;
+}
+.drawer {
+  height: 10em;
+}
 li {
     list-style: none;
 }
@@ -19,7 +33,7 @@ li {
 }
 
 .logo {
-    margin: 0 auto;
+    /*margin: auto;*/
 }
 
 img {
@@ -34,7 +48,8 @@ img {
 }
 
 .buttons {
-    width: 9em;
+    width: 12em;
+    margin: 10px;
 }
 
 .signUp {
@@ -87,5 +102,67 @@ img {
 }
 
 .trialdos {
-  background-color: gray;
+  /*background-color: gray;*/
+
+}
+.select-style {
+    padding: 0;
+    margin: 0;
+    border: 1px solid #ccc;
+    width: 200px;
+    border-radius: 5px;
+    overflow: hidden;
+    background-color: #fff;
+    height: 30px;
+}
+
+.select-style select {
+    padding: 5px 8px;
+    width: 200%;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+    background-image: none;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+}
+
+.select-style select:focus {
+    outline: none;
+}
+.input {
+  color: black;
+}
+
+.user {
+  color: white;
+  text-decoration: none;
+  font-size: 1.2em;
+}
+.userSignUp {
+  display: flex;
+  padding: 10px;
+  width: 30%;
+  margin: auto;
+  flex-direction: row;
+  justify-content: space-between;
+  /*padding: 15em;
+  margin-top: -12em;
+  margin-left: 5em;
+  margin-right: 5em;*/
+}
+.userBtn {
+  width: 1em;
+}
+.userSignUp2{
+  display: block;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-top: 20px;
+  margin: 10px;
+}
+.info {
+ display: flex;
+ align-items: center;
 }
