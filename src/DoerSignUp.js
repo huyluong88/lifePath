@@ -35,7 +35,8 @@ class DoerSignUp extends Component {
       doers: [],
       disabled: false,
       open: false,
-      value: ''
+      value: '',
+      uploadImage: ''
     }
   }
 componentDidMount(){
@@ -45,21 +46,28 @@ componentDidMount(){
       asArray: true
   })
 }
-
+handleImageChange(e) {
+  e.preventDefault()
+  let reader = new FileReader()
+  let file = e.target.files[0];
+  this.setState({
+    uploadImage: file
+  })
+ }
 addDoer(e) {
     e.preventDefault()
     const firstName = this.firstN.input.value
     const lastName = this.lastN.input.value
     const password = this.password.input.value
-    let reader = new FileReader();
-    let file = e.target.files[0];
-    reader.readAsDataURL(file)
+    // let reader = new FileReader();
+    // let file = e.target.files[0];
+    // reader.readAsDataURL(file)
     let doersArr = this.state.doers.length
     // const picture = this.photo.value
     // const filename = picture.replace(/^.*\\/, "");
     // console.log('pic is ', filename)
-    const storageRef = firebase.storage().ref(`${doersArr}`)
-    const task = storageRef.put(file)
+    const storageRef = firebase.storage().ref(`doer/${doersArr}`)
+    const task = storageRef.put(this.state.uploadImage)
     if (firstName.length === 0 && lastName.length === 0) {
         alert('enter a first and last name')
     } else if (firstName.length < 2 && lastName.length < 2) {
@@ -140,23 +148,6 @@ handleChange = (event, index, value) => {
 };
 
 
-
-
-_handleImageChange(e) {
-   e.preventDefault();
-
-   let reader = new FileReader();
-   let file = e.target.files[0];
-   console.log('file is ', file)
-  //  reader.onloadend = () => {
-  //   //  this.setState({
-  //   //    file: file,
-  //   //    imagePreviewUrl: reader.result
-  //   //  });
-  //  }
-
-   reader.readAsDataURL(file)
- }
 render (){
   console.log('doers in DB ', this.state.doers.length)
 
@@ -205,7 +196,7 @@ render (){
               <option value='Non-Profit'>Non-Profit</option>
             </select>
 
-            <input className='upload' type='file' ref={element => this.photo = element} onChange={(e)=>this.addDoer(e)}/>
+            <input className='upload' type='file' ref={element => this.photo = element} onChange={(e)=>this.handleImageChange(e)}/>
 
         </div>
         <div className='userSignUp'>

@@ -75,7 +75,6 @@ class App extends Component {
           </div>
           <footer>
           </footer>
-          {this.props.children}
         </div>
       </MuiThemeProvider>
 
