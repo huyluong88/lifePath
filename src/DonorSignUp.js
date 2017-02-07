@@ -9,6 +9,9 @@ import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
 import AppBar from 'material-ui/AppBar';
 import firebase from './config'
+import Snackbar from 'material-ui/Snackbar';
+import { Link } from 'react-router';
+
 
 const style = {
   marginLeft: 20,
@@ -27,7 +30,10 @@ class DonorSignUp extends Component {
     super()
     this.state = {
       donors: [],
-      disabled: true
+      disabled: false,
+      open: false,
+      value: '',
+      uploadImage: ''
     }
   }
 componentDidMount(){
@@ -37,17 +43,24 @@ componentDidMount(){
       asArray: true
   })
 }
+handleImageChange(e) {
+  e.preventDefault()
+  let reader = new FileReader()
+  let file = e.target.files[0];
+  this.setState({
+    uploadImage: file
+  })
+ }
 
 addDonor(e){
   const firstName = this.firstN.input.value
   const lastName = this.lastN.input.value
   const password = this.password.input.value
-  let reader = new FileReader();
-  let file = e.target.files[0];
-  reader.readAsDataURL(file)
+  // let reader = new FileReader();
+  // let file = e.target.files[0];
   let donorsArr = this.state.donors.length
-  const storageRef = firebase.storage().ref(`${donorsArr}`)
-  const task = storageRef.put(file)
+  const storageRef = firebase.storage().ref(`donor/${donorsArr}`)
+  const task = storageRef.put(this.state.uploadImage)
 
   if (firstName.length === 0 && lastName.length === 0) {
       alert('enter a first and last name')
@@ -80,13 +93,20 @@ addDonor(e){
       email: this.email.input.value,
       password: password
   }, () => {
-      alert('thanks for signing up!')
-  })
+      // alert('thanks for signing up!')
+      this.setState({
+        open: true
+      },()=>{
+        this.firstN.input.value = '',
+        this.lastN.input.value ='',
+        // this.photo.element.value ='',
+        this.email.input.value ='',
+        this.password.input.value=''
+      })
+    })
   this.setState({
     donors: newDonorsArray
   })
-
-  this.props.router.push('/')
 }
 }
 
@@ -140,10 +160,18 @@ render (){
      </select> <br />
      <Divider style={style3}/>
 
-     <input type='file' ref={element => this.photo = element} onChange={(e)=>this.addDonor(e)}/>
+     <input type='file' ref={element => this.photo = element} onChange={(e)=>this.handleImageChange(e)}/>
    <RaisedButton label="Submit"
    backgroundColor ='#d15e29'
    onClick={this.addDonor.bind(this)}/>
+   <Link to ="/">
+   <RaisedButton label="Back to home" backgroundColor='#d15e29' className="buttons"/>
+   </Link>
+   <Snackbar
+     open={this.state.open}
+     message="Thank you for signing up"
+     autoHideDuration={5000}
+     />
 
 
     </section>
