@@ -4,6 +4,8 @@ import { withRouter } from 'react-router';
 import FlatButton from 'material-ui/FlatButton';
 import { Link } from 'react-router'
 import DonorProfile from './DonorProfile'
+import TextField from 'material-ui/TextField';
+
 
 class Donors extends Component {
   constructor(){
@@ -31,7 +33,7 @@ componentDidMount(){
 }
 
 searchADonor = () => {
-    const search = this.searchDonor.value
+    const search = this.searchDonor.input.value
     console.log(search)
     const mapDonor = this.state.donors.map(donor => {
         return (donor)
@@ -48,7 +50,7 @@ searchADonor = () => {
             donorResult: donor
         })
     }
-    this.searchDonor.value = ''
+    this.searchDonor.input.value = ''
   }
   openSearchDoer(user){
     console.log('searched user is ', user)
@@ -62,18 +64,23 @@ render (){
 
   return(
     <div>
-    <input placeholder="Search for a donor" ref={element => this.searchDonor = element}/>
+    <TextField
+     ref={input => this.searchDonor = input}
+     floatingLabelText="Search for a doer"
+     type="text"
+    />
+
     <FlatButton
       label="Search"
-      primary={true}
+      backgroundColor='#5b453b'
       onClick={this.searchADonor}
     />
     {this.state.donorResult.map(donor=>{
-      return(<li><Link to ={`/donors/${donor.key}`}>{donor.general.firstName} {donor.general.lastName}</Link></li>)})}
+      return(<li><Link className='user' to ={`/donors/${donor.key}`}>{donor.general.firstName} {donor.general.lastName}</Link></li>)})}
 
       <ul>
         {this.state.donors.map((donor, index) => {
-          return (<li key={index}> <Link to ={`/donors/${donor.key}`}>{donor.general.firstName} {donor.general.lastName}</Link></li>)
+          return (<li key={index}> <Link className='user' to ={`/donors/${donor.key}`}>{donor.general.firstName} {donor.general.lastName}</Link></li>)
         })}
       </ul>
 

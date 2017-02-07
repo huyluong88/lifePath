@@ -2,7 +2,16 @@ import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import base from './config';
 import './index.css';
-class DonorHome extends Component {
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import AppBar from 'material-ui/AppBar';
+
+const style2 ={
+  backgroundColor: '#5b453b',
+  // width: 200,
+}
+
+class donorLogin extends Component {
   constructor () {
     super()
     this.state = {
@@ -37,8 +46,8 @@ class DonorHome extends Component {
 }
 logIn() {
     base.authWithPassword({
-        email: this.email.value,
-        password: this.password.value
+        email: this.email.input.value,
+        password: this.password.input.value
     }, this.authStateChanged.bind(this)).catch(err => console.error(err))
 }
 logOut() {
@@ -46,8 +55,8 @@ logOut() {
       userName: ''
   })
   base.unauth()
-  this.email.value = '',
-  this.password.value = ''
+  this.email.input.value = '',
+  this.password.input.value = ''
 }
 authStateChanged(error, user) {
 console.log('error is ', error)
@@ -70,7 +79,7 @@ if(error){
            state: 'donor',
            then: (donor) => {
             this.setState ({
-             userName: this.email.value,
+             userName: this.email.input.value,
              firstName: this.state.donor.general.firstName,
              lastName: this.state.donor.general.lastName,
              toE: this.state.donor.general.toE,
@@ -89,42 +98,55 @@ if(error){
        })
       }
 }
-handleEdit(e){
-if(e.keyCode === 13){
-  const toe = this.test.value
-  this.setState({
-    award: toe
-  })
-}
-}
+// handleEdit(e){
+// if(e.keyCode === 13){
+//   const toe = this.test.value
+//   this.setState({
+//     award: toe
+//   })
+// }
+// }
 render (){
   console.log("self data is", this.state.donor)
   return (
     <div>
+    <AppBar
+    title="Login into your Donor account"
+    showMenuIconButton={false}
+    style={style2}
+    />
+
     <section hidden={this.state.userName}>
-      <button
-        type="submit"
-        onClick={this.logIn.bind(this)}>Log In</button>
-        <input
-        ref={node => this.email = node}
-        placeholder="email" />
-        <input
-        ref={node => this.password = node}
-        placeholder="password"
-        type='password' />
+        <TextField
+         ref={input => this.email = input}
+         floatingLabelText="email"
+         type="text"
+        />
+        <TextField
+         ref={input => this.password = input}
+         floatingLabelText="password"
+         type="password"
+        />
+        <RaisedButton
+        label='Login'
+        backgroundColor='#d15e29'
+        onClick={this.logIn.bind(this)}/>
+
       </section>
-      <button
-        hidden={!this.state.userName}
-        type="submit"
-        onClick={this.logOut.bind(this)}>Log out</button>
+      <RaisedButton
+      label="Logout"
+      hidden={!this.state.userName}
+      backgroundColor='#d15e29'
+      disabled={true === !this.state.userName}
+      onClick={this.logOut.bind(this)}/>
+
       <div hidden={!this.state.userName}>
-      <input ref={node => this.test = node} />
           <h2>Name</h2>
             <p>{this.state.firstName} {this.state.lastName}</p>
           <h2>Details</h2>
             <strong>Type of Entity: </strong><span>{this.state.toE}</span><br/>
             <strong>Industry: </strong><span>{this.state.industry}</span><br/>
-            <strong>Award: </strong><span contentEditable= {true} onKeyUp={this.handleEdit.bind(this)}>{this.state.award}</span>
+            <strong>Award: </strong><span>{this.state.award}</span>
           <h2>Purpose</h2>
             <strong>Our Story: </strong><span>{this.state.ourStory}</span><br/>
             <strong>Focus/Mission: </strong><span>{this.state.focusMission}</span><br/>
@@ -142,4 +164,4 @@ render (){
   )
   }
 }
-export default DonorHome
+export default donorLogin
