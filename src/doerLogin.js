@@ -77,7 +77,7 @@ class doerLogin extends Component {
                 return (doer.contact.email == `${doerEmail}`)
             })
             let storageRef = firebase.storage();
-            let starsRef = storageRef.ref(`${doer[0].key}`);
+            let starsRef = storageRef.ref(`doer/${doer[0].key}`);
             starsRef.getDownloadURL().then((url) => {
                 // Insert url into an <img> tag to "download"
                 console.log('DL is ', url)
@@ -336,12 +336,12 @@ class doerLogin extends Component {
        disabled={true === !this.state.userName}
        onClick={this.logOut.bind(this)}/>
       <div hidden={!this.state.userName}>
+        <img src={this.state.testingPhoto}/>
           <section className="info">
           <h2>Name</h2>
           <FlatButton label="Edit Name" primary={true}
             onClick={this.openEditName.bind(this)}/>
           </section>
-            <img src={this.state.testingPhoto} />
             <p>{this.state.doer.general.firstName} {this.state.doer.general.lastName}</p>
           <section className="info">
           <h2>Details</h2>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import base from './config';
 import './index.css';
+
 class DoerProfile extends Component {
   constructor () {
     super()

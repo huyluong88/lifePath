@@ -12,14 +12,13 @@ import donorLogin from './donorLogin';
 
 ReactDOM.render(
   <Router history={hashHistory}>
-  <Route  path="/" component={App}>
+  <Route  path="/" component={App}/>
     <Route path="/DoerSignUp" component={DoerSignUp}/>
     <Route path="/DonorSignUp" component={DonorSignUp}/>
     <Route path="/donors/:name" component={DonorProfile}/>
     <Route path="/doers/:name" component={DoerProfile}/>
     <Route path="/doerLogin" component={doerLogin}/>
     <Route path="/donorLogin" component={donorLogin}/>
-  </Route>
 </Router>,
   document.getElementById('root')
 );
