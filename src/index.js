@@ -17,7 +17,6 @@ ReactDOM.render(
   <Route path="/doers/:name" component={DoerProfile}/>
   <Route path="/DonorSignUp" component={DonorSignUp}/>
   <Route path="/donors/:name" component={DonorProfile}/>
-  <Route path="/doers/:name" component={DoerProfile}/>
   <Route path="/selfProfile" component={selfProfile}/>
   <Route path="/donorHome" component={DonorHome}/>
 

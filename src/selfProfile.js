@@ -2,32 +2,33 @@ import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
 import base from './config';
 import './index.css';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import RaisedButton from 'material-ui/RaisedButton';
+
 class selfProfile extends Component {
   constructor () {
     super()
     this.state = {
       doers:[],
-      doer: {},
-      userName: '',
-      firstName: '',
-      lastName: '',
-      toE: '',
-      industry: '',
-      award: '',
-      ourStory: '',
-      focusMission: '',
-      niche: '',
-      email: '',
-      phone: '',
-      website: '',
+      doer: {
+        general: {},
+        contact: {},
+        beneficiaries: {},
+        accountability: {},
+        purpose: {},
+      },
       ninetydayGoals: [],
       weeklyScore: [],
-      yearand3years: []
+      yearand3years: [],
+      open: false
     }
   }
   componentDidMount () {
   base.fetch('doers', {
     context: this,
+    asArray: true,
     then: (data) => {
       console.log("data is", data)
       this.setState({
@@ -71,18 +72,7 @@ if(error){
            state: 'doer',
            then: (doer) => {
             this.setState ({
-             userName: this.email.value,
-             firstName: this.state.doer.general.firstName,
-             lastName: this.state.doer.general.lastName,
-             toE: this.state.doer.general.toE,
-             industry: this.state.doer.general.industry,
-             award: this.state.doer.general.award,
-             ourStory: this.state.doer.purpose.ourStory,
-             focusMission: this.state.doer.purpose.focusMission,
-             niche: this.state.doer.purpose.niche,
-             email: this.state.doer.contact.email,
-             phone: this.state.doer.contact.phone,
-             website: this.state.doer.contact.website,
+             userName: doerEmail,
              ninetydayGoals: this.state.doer.performance.ninetydayGoals,
              weeklyScore: this.state.doer.performance.weeklyScore,
              yearand3years: this.state.doer.performance.yearand3years
@@ -91,17 +81,39 @@ if(error){
        })
       }
 }
-handleEdit(e){
-if(e.keyCode === 13){
-  const toe = this.test.value
-  this.setState({
-    award: toe
+
+openEditName() {
+  this.setState ({
+    open: true
   })
 }
+
+handleClose = () => this.setState({open: !this.state.open});
+
+changeName() {
+  const otherName = this.newName.value
+  console.log('here is ', this.doerObj)
+  this.setState ({
+    doer: {
+      general: {
+        firstName: otherName
+      }
+    }
+  })
 }
+
 render (){
   console.log("self data is", this.state.doer)
+    const actions = [
+     <RaisedButton
+       label="Close"
+       primary={true}
+       onClick={this.handleClose}
+     />
+   ];
   return (
+    <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
+
     <div>
     <section hidden={this.state.userName}>
       <button
@@ -121,20 +133,21 @@ render (){
         onClick={this.logOut.bind(this)}>Log out</button>
       <div hidden={!this.state.userName}>
       <input ref={node => this.test = node} />
-          <h2>Name</h2>
-            <p>{this.state.firstName} {this.state.lastName}</p>
+          <h2>Name</h2><RaisedButton label="Edit" primary={true} className="buttons"
+            onClick={this.openEditName.bind(this)}/>
+            <p>{this.state.doer.general.firstName} {this.state.doer.general.lastName}</p>
           <h2>Details</h2>
-            <strong>Type of Entity: </strong><span>{this.state.toE}</span><br/>
-            <strong>Industry: </strong><span>{this.state.industry}</span><br/>
-            <strong>Award: </strong><span contentEditable= {true} onKeyUp={this.handleEdit.bind(this)}>{this.state.award}</span>
+            <strong>Type of Entity: </strong><span>{this.state.doer.general.toE}</span><br/>
+            <strong>Industry: </strong><span>{this.state.doer.general.industry}</span><br/>
+            <strong>Award: </strong><span>{this.state.doer.general.award}</span>
           <h2>Purpose</h2>
-            <strong>Our Story: </strong><span>{this.state.ourStory}</span><br/>
-            <strong>Focus/Mission: </strong><span>{this.state.focusMission}</span><br/>
-            <strong>niche: </strong><span>{this.state.niche}</span>
+            <strong>Our Story: </strong><span>{this.state.doer.purpose.ourStory}</span><br/>
+            <strong>Focus/Mission: </strong><span>{this.state.doer.purpose.focusMission}</span><br/>
+            <strong>niche: </strong><span>{this.state.doer.purpose.niche}</span>
             <h2>Contact Information</h2>
-              <strong>email: </strong><span>{this.state.email}</span><br/>
-              <strong>phone: </strong><span>{this.state.phone}</span><br/>
-              <strong>website: </strong><span>{this.state.website}</span><br/>
+              <strong>email: </strong><span>{this.state.doer.contact.email}</span><br/>
+              <strong>phone: </strong><span>{this.state.doer.contact.phone}</span><br/>
+              <strong>website: </strong><span>{this.state.doer.contact.website}</span><br/>
               <h2>Performance</h2>
                 <strong>90 Day Goals</strong>
                   <table className="tg">
@@ -147,12 +160,12 @@ render (){
                      <th className="tg-yw4l">Goal Met</th>
                    </tr>
                    <tr>
-                   <td className="tg-6k2t" contentEditable={true}>
+                   <td className="tg-6k2t">
                      {this.state.ninetydayGoals.map (stuff => {
                        return (<tr>{stuff.category}</tr>)
                      })}
                    </td>
-                   <td className="tg-6k2t" contentEditable={true}>
+                   <td className="tg-6k2t">
                      {this.state.ninetydayGoals.map (stuff => {
                        return (<tr >{stuff.owner}</tr>)
                      })}
@@ -266,7 +279,17 @@ render (){
                    </tr>
                   </table>
             </div>
+            <Dialog
+              title="Edit Name"
+              actions={actions}
+              open={this.state.open}
+             >
+             <input type="text" placeholder="change name" ref={element => this.newName = element}/>
+             <RaisedButton label="Submit" primary={true} onClick={this.changeName.bind(this)}/>
+             </Dialog>
     </div>
+    </MuiThemeProvider>
+
   )
   }
 }
