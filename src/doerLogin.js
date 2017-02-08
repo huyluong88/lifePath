@@ -5,11 +5,23 @@ import firebase from './config'
 import './index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
+import { Link } from 'react-router';
+import pic from './lifepathlogo.png';
 
+const styles = {
+  marginLeft: 20,
+  width: 300,
+  underlineStyle: {
+    borderColor: '#d15e29',
+  },
+  floatingLabelStyle: {
+    color: 'black',
+  },
+}
 const style = {
     marginLeft: 20,
     Color: 'red',
@@ -40,7 +52,8 @@ class doerLogin extends Component {
             open5: false,
             open6: false,
             open7: false,
-            testingPhoto: 'nothing yet'
+            testingPhoto: 'nothing yet',
+            capDoer: []
         }
     }
     componentDidMount() {
@@ -76,6 +89,11 @@ class doerLogin extends Component {
             const doer = this.state.doers.filter(doer => {
                 return (doer.contact.email == `${doerEmail}`)
             })
+            this.setState ({
+             capDoer: doer.map (key => {
+               return (key.key)
+             })
+           })
             let storageRef = firebase.storage();
             let starsRef = storageRef.ref(`doer/${doer[0].key}`);
             starsRef.getDownloadURL().then((url) => {
@@ -188,18 +206,26 @@ class doerLogin extends Component {
         })
     }
     addGoal() {
-        let newGoal = [{
-            category: this.category.value,
-            owner: this.owner.value,
-            smartGoals: this.smartGoals.value,
-            dateSet: this.dateSet.value,
-            endDate: this.datesend.value,
-            goalMet: this.goal.value
-        }]
-        let addedGoals = this.state.ninetydayGoals.concat(newGoal)
-        this.setState({
-            ninetydayGoals: addedGoals
-        })
+      base.post(`/doers/${this.state.capDoer}/performance/ninetydayGoals/${this.state.ninetydayGoals.length}`,{
+             data: {
+                       category: this.category.value,
+                       owner: this.owner.value,
+                       smartGoals: this.smartGoals.value,
+                       dateSet: this.dateSet.value,
+                       endDate: this.datesend.value,
+                       goalMet: this.goal.value
+             }
+           })
+           base.fetch(`doers/${this.state.capDoer}/performance/ninetydayGoals`, {
+             context: this,
+             asArray: true,
+             then: (data) => {
+               this.setState({
+               ninetydayGoals: data
+             })
+             console.log('what is ', data)
+           }
+           })
     }
     openScore() {
         this.setState({
@@ -207,18 +233,26 @@ class doerLogin extends Component {
         })
     }
     addScore() {
-        let newScore = [{
-            category: this.weeklyCategory.value,
-            owner: this.weeklyOwner.value,
-            measurable: this.measurable.value,
-            goal: this.weeklyGoal.value,
-            weekbegin: this.weeklyDatestart.value,
-            weekEnd: this.weeklyDatesend.value
-        }]
-        let addedScore = this.state.weeklyScore.concat(newScore)
-        this.setState({
-            weeklyScore: addedScore
-        })
+      base.post(`/doers/${this.state.capDoer}/performance/weeklyScore/${this.state.weeklyScore.length}`,{
+             data: {
+               category: this.weeklyCategory.value,
+               owner: this.weeklyOwner.value,
+               measurable: this.measurable.value,
+               goal: this.weeklyGoal.value,
+               weekbegin: this.weeklyDatestart.value,
+               weekEnd: this.weeklyDatesend.value
+             }
+           })
+           base.fetch(`doers/${this.state.capDoer}/performance/weeklyScore`, {
+             context: this,
+             asArray: true,
+             then: (data) => {
+               this.setState({
+               weeklyScore: data
+             })
+             console.log('what is ', data)
+           }
+           })
     }
     openYear() {
         this.setState({
@@ -226,18 +260,26 @@ class doerLogin extends Component {
         })
     }
     addYear() {
-        let newYear = [{
-            category: this.yearCategory.value,
-            owner: this.yearOwner.value,
-            smartGoals: this.yearSmartGoals.value,
-            dateSet: this.yearDatestart.value,
-            endDate: this.yearDatesend.value,
-            goalMet: this.yearGoal.value
-        }]
-        let addedYear = this.state.yearand3years.concat(newYear)
-        this.setState({
-            yearand3years: addedYear
-        })
+      base.post(`/doers/${this.state.capDoer}/performance/yearand3years/${this.state.yearand3years.length}`,{
+             data: {
+               category: this.yearCategory.value,
+               owner: this.yearOwner.value,
+               smartGoals: this.yearSmartGoals.value,
+               dateSet: this.yearDatestart.value,
+               endDate: this.yearDatesend.value,
+               goalMet: this.yearGoal.value
+             }
+           })
+           base.fetch(`doers/${this.state.capDoer}/performance/yearand3years`, {
+             context: this,
+             asArray: true,
+             then: (data) => {
+               this.setState({
+               yearand3years: data
+             })
+             console.log('what is ', data)
+           }
+           })
     }
     handleClose = () => this.setState({
         open: !this.state.open
@@ -259,7 +301,8 @@ class doerLogin extends Component {
     });
     handleClose7 = () => this.setState({
         open7: !this.state.open7
-    });render (){
+    });
+    render (){
     const actions = [
      <RaisedButton
        label="Close"
@@ -310,20 +353,32 @@ class doerLogin extends Component {
       />
   ];
   return (
-    <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-    <div>
+    <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+    <div className='App'>
+    <header className="App-header">
+      <div className="logo">
+        <img src= { pic }/>
+      </div>
+    </header>
+
     <h1>Login into your Doer account</h1>
     <section hidden={this.state.userName}>
     <TextField
       ref={input => this.email = input}
       floatingLabelText="email"
       type="text"
-     />
+      style={styles}
+      floatingLabelStyle={styles.floatingLabelStyle}
+      underlineFocusStyle={styles.underlineStyle}
+     /> <br />
      <TextField
       ref={input => this.password = input}
       floatingLabelText="password"
       type="password"
-     />
+      style={styles}
+      floatingLabelStyle={styles.floatingLabelStyle}
+      underlineFocusStyle={styles.underlineStyle}
+     /> <br />
      <RaisedButton
      label='Login'
      backgroundColor='#d15e29 '
@@ -334,7 +389,12 @@ class doerLogin extends Component {
        hidden={!this.state.userName}
        backgroundColor='#d15e29 '
        disabled={true === !this.state.userName}
-       onClick={this.logOut.bind(this)}/>
+       onClick={this.logOut.bind(this)}
+    />
+       <Link to ="/">
+       <RaisedButton label="Back to home" backgroundColor='#d15e29' className="buttons"/>
+       </Link>
+
       <div hidden={!this.state.userName}>
         <img src={this.state.testingPhoto}/>
           <section className="info">
@@ -519,9 +579,13 @@ class doerLogin extends Component {
                open={this.state.open}
               >
               <input type="text" placeholder="change first name"
-              ref={element => this.newName = element}/><br/>
+              ref={element => this.newName = element}
+              defaultValue={this.state.doer.general.firstName}
+              /><br/>
               <input type="text" placeholder="change last name"
-              ref={element => this.newLastName = element}/><br/>
+              ref={element => this.newLastName = element}
+              defaultValue={this.state.doer.general.lastName}
+              /><br/>
               <RaisedButton label="Submit" primary={true} onClick={this.changeName.bind(this)}/>
               </Dialog>
 
@@ -530,11 +594,17 @@ class doerLogin extends Component {
                  actions={actions2}
                  open={this.state.open2}>
                  <input type="text" placeholder="change Type of Entity"
-                 contentEditable= {true}  ref={element => this.newToE = element}/><br/>
+                 contentEditable= {true}  ref={element => this.newToE = element}
+                 defaultValue={this.state.doer.general.toE}
+                 /><br/>
                  <input type="text" placeholder="Industry"
-                 ref={element => this.newIndustry = element}/><br/>
+                 ref={element => this.newIndustry = element}
+                 defaultValue={this.state.doer.general.industry}
+                 /><br/>
                  <input type="text" placeholder="Award"
-                 ref={element => this.newAward = element}/><br/>
+                 ref={element => this.newAward = element}
+                 defaultValue={this.state.doer.general.award}
+                 /><br/>
                  <RaisedButton label="Submit" primary={true} onClick={this.changeDetails.bind(this)}/>
               </Dialog>
 
@@ -543,11 +613,17 @@ class doerLogin extends Component {
                  actions={actions3}
                  open={this.state.open3}>
                  <input type="text" placeholder="change Type of Story"
-                 ref={element => this.newStory = element}/><br/>
+                 ref={element => this.newStory = element}
+                 defaultValue={this.state.doer.purpose.ourStory}
+                 /><br/>
                  <input type="text" placeholder="Focus/Mission"
-                 ref={element => this.newFocus = element}/><br/>
+                 ref={element => this.newFocus = element}
+                 defaultValue={this.state.doer.purpose.focusMission}
+                 /><br/>
                  <input type="text" placeholder="Niche"
-                 ref={element => this.newNiche = element}/><br/>
+                 ref={element => this.newNiche = element}
+                 defaultValue={this.state.doer.purpose.niche}
+                 /><br/>
                  <RaisedButton label="Submit" primary={true} onClick={this.changePurpose.bind(this)}/>
               </Dialog>
 
@@ -556,9 +632,13 @@ class doerLogin extends Component {
                  actions={actions4}
                  open={this.state.open4}>
                  <input type="text" placeholder="change phone"
-                 ref={element => this.newPhone = element}/><br/>
+                 ref={element => this.newPhone = element}
+                 defaultValue={this.state.doer.contact.phone}
+                 /><br/>
                  <input type="text" placeholder="change website"
-                 ref={element => this.newWebsite = element}/><br/>
+                 ref={element => this.newWebsite = element}
+                 defaultValue={this.state.doer.contact.website}
+                 /><br/>
                  <RaisedButton label="Submit" primary={true} onClick={this.changeContact.bind(this)}/>
               </Dialog>
 

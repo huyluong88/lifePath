@@ -24,10 +24,10 @@
                 "accreditations": "TIY",
                 "financialHighs": "string"
             },
-            "beneficiaries": {
-                "beneficiaries1": "string",
-                "beneficiaries2": "TIY"
-            },
+            "beneficiaries": [
+                {"beneficiaries1": "string"},
+                {"beneficiaries2": "TIY"}
+            ],
             "performance": {
                 "ninetydayGoals": [{
                     "category": "Fund",
@@ -135,10 +135,10 @@
                 "accreditations": "String",
                 "financialHighs": "FinanceStuff"
             },
-            "beneficiaries": {
-                "beneficiaries1": "Description & Link",
-                "beneficiaries2": "Description & Link"
-            },
+            "beneficiaries": [
+                {"beneficiaries1": "Description & Link"},
+                {"beneficiaries2": "Description & Link"}
+            ],
             "performance": {
                 "ninetydayGoals": [{
                     "category": "String",
