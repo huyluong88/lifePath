@@ -302,6 +302,19 @@ class doerLogin extends Component {
     handleClose7 = () => this.setState({
         open7: !this.state.open7
     });
+    deleteTableItem (clickedItem){
+      console.log('clicked item name is ', clickedItem)
+      let ninetydayGoals = this.state.ninetydayGoals.filter(cat=>cat !==clickedItem)
+      this.setState({
+        ninetydayGoals: ninetydayGoals
+      })
+      base.update (`/doers/${this.state.capDoer}/performance/`,{
+        data: {
+          ninetydayGoals
+        }
+      })
+    }
+
     render (){
     const actions = [
      <RaisedButton
@@ -444,8 +457,9 @@ class doerLogin extends Component {
                    </tr>
                    <tr>
                    <td className="tg-6k2t">
-                     {this.state.ninetydayGoals.map (stuff => {
-                       return (<tr>{stuff.category}</tr>)
+                     {this.state.ninetydayGoals.map (cat => {
+                       return (<tr>{cat.category}
+                         <button onClick={this.deleteTableItem.bind(this, cat)}>X</button></tr>)
                      })}
                    </td>
                    <td className="tg-6k2t">
