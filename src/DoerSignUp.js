@@ -3,11 +3,10 @@ import base  from './config';
 import { withRouter } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import RaisedButton from 'material-ui/RaisedButton';
 import DatePicker from 'material-ui/DatePicker';
 import TextField from 'material-ui/TextField';
-import Divider from 'material-ui/Divider';
 import AppBar from 'material-ui/AppBar';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
@@ -18,6 +17,13 @@ import { Link } from 'react-router';
 
 const style = {
   marginLeft: 20,
+  width: 300,
+  underlineStyle: {
+    borderColor: '#d15e29',
+  },
+  floatingLabelStyle: {
+    color: '#d15e29',
+  },
 }
 const style2 ={
   backgroundColor: '#5b453b',
@@ -28,6 +34,7 @@ const style3 = {
   marginRight: 300,
 }
 
+
 class DoerSignUp extends Component {
   constructor(){
     super()
@@ -35,7 +42,6 @@ class DoerSignUp extends Component {
       doers: [],
       disabled: false,
       open: false,
-      value: '',
       uploadImage: ''
     }
   }
@@ -143,19 +149,19 @@ addDoer(e) {
     }
 }
 // ,()=>{this.props.router.push('/')}
-handleChange = (event, index, value) => {
-  this.setState({value})
-};
 
-
+handleFile(e){
+  let reader = new FileReader()
+  let file = e.target.files[0];
+  const storageRef = firebase.storage().ref('File')
+  const task = storageRef.put(file)
+}
 render (){
   console.log('doers in DB ', this.state.doers.length)
 
   return(
-    <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-    <section className="trialdos">
-    <Divider />
-
+    <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+    <section className="userCreation">
        <h1>Create your Doer account</h1>
         <TextField
          className='input'
@@ -163,30 +169,27 @@ render (){
          floatingLabelText="First Name"
          type="text"
          style={style}
-
-         />
-         <Divider style={style3} />
+         floatingLabelStyle={style.floatingLabelStyle}
+         underlineFocusStyle={style.underlineStyle}/> <br/>
         <TextField
          ref={input => this.lastN = input}
          floatingLabelText="Last Name"
          type="text"
          style={style}
-        />
-        <Divider style={style3} />
+        /> <br/>
         <TextField
          ref={input => this.email = input}
          floatingLabelText="email"
          type="text"
          style={style}
-        />
-        <Divider style={style3}/>
+         floatingLabelFixed={false}
+        /> <br/>
         <TextField
          ref={input => this.password = input}
          floatingLabelText="password"
          type="password"
          style={style}
         /> <br />
-        <Divider style={style3}/>
 
         <div className='userSignUp2'>
         Type of Entity:
@@ -194,9 +197,11 @@ render (){
               <option value='Company'>Company</option>
               <option value='Foundation'>Foundation</option>
               <option value='Non-Profit'>Non-Profit</option>
-            </select>
+            </select> <br/>
 
             <input className='upload' type='file' ref={element => this.photo = element} onChange={(e)=>this.handleImageChange(e)}/>
+            <h1>files</h1>
+            <input className='upload' type='file'  onChange={(e)=>this.handleFile(e)}/>
 
         </div>
         <div className='userSignUp'>
@@ -209,17 +214,6 @@ render (){
             <RaisedButton label="Back to home" backgroundColor='#d15e29' className="buttons"/>
             </Link>
         </div>
-        <SelectField
-          value={this.state.value}
-          onChange={this.handleChange}
-          maxHeight={300}
-          ref={input => this.value= input}
-          >
-          <MenuItem value="Company" key={1} primaryText="Company" />
-          <MenuItem value="Foundation" key={2} primaryText="Foundation" />
-          <MenuItem value="Non-Profit" key={3} primaryText="Non-Profit" />
-        </SelectField>
-
         <Snackbar
           open={this.state.open}
           message="Thank you for signing up"

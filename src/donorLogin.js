@@ -9,7 +9,7 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import firebase from './config'
-c
+
 
 const style2 ={
   backgroundColor: '#5b453b',
