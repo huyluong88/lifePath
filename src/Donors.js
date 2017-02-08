@@ -6,6 +6,16 @@ import { Link } from 'react-router'
 import DonorProfile from './DonorProfile'
 import TextField from 'material-ui/TextField';
 
+const styles = {
+  marginLeft: 20,
+  width: 300,
+  underlineStyle: {
+    borderColor: '#d15e29',
+  },
+  floatingLabelStyle: {
+    color: 'white',
+  },
+}
 
 class Donors extends Component {
   constructor(){
@@ -68,6 +78,9 @@ render (){
      ref={input => this.searchDonor = input}
      floatingLabelText="Search for a doer"
      type="text"
+     style={styles}
+     floatingLabelStyle={styles.floatingLabelStyle}
+     underlineFocusStyle={styles.underlineStyle}
     />
 
     <FlatButton

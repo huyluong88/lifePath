@@ -38,44 +38,46 @@ class App extends Component {
 
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-        <div className="App">
-          <header className="App-header">
-            <div className="logo">
-              <img src= { pic }/>
+      <div>
+          <div className="App">
+              <header className="App-header">
+                <div className="logo">
+                  <img src= { pic }/>
+                </div>
+                <div className='link'>
+                  <Link className='link' to="/doerLogin">Doer login</Link>
+                  <Link className='link' to="/donorLogin">Donor login</Link>
+                </div>
+              </header>
+
+              <div className="utilities">
+                  <RaisedButton label="Doers" backgroundColor='#d15e29' style={style} className="buttons"
+                    onClick={this.handleToggle}/>
+
+                  <Drawer open={this.state.open}>
+                      <AppBar showMenuIconButton={false} title="Doers" style={style2}/>
+                      <Doers/>
+                  </Drawer>
+
+                  <RaisedButton label="Donors" backgroundColor='#d15e29' style={style} className="buttons"
+                   onClick={this.handleToggle2}/>
+                  <Drawer width={250} openSecondary={true} open={this.state.open2} >
+                      <AppBar showMenuIconButton={false} title="Donors" style={style2}/>
+                      <Donors />
+                  </Drawer>
+              </div>
+
+              <div className="signUp">
+                  <Link to ="/DoerSignUp"><RaisedButton label="Be a Doer" backgroundColor='#d15e29' style={style} className="buttons"/>
+                  </Link>
+                  <Link to ="/DonorSignUp"><RaisedButton label="Be a Donor" backgroundColor='#d15e29' style={style} className="buttons"/>
+                  </Link>
+              </div>
             </div>
-            <div className='link'>
-              <Link className='link' to="/doerLogin">Sign in to your doer account</Link>
-              <Link className='link' to="/donorLogin">Sign in to your donor account</Link>
-              <Link className='link' to="/">Home</Link>
-            </div>
-          </header>
 
-          <div className="utilities">
-              <RaisedButton label="Doers" backgroundColor='#d15e29' style={style} className="buttons"
-                onClick={this.handleToggle}/>
-
-              <Drawer open={this.state.open}>
-                  <AppBar showMenuIconButton={false} title="Doers" style={style2}/>
-                  <Doers/>
-              </Drawer>
-
-              <RaisedButton label="Donors" backgroundColor='#d15e29' style={style} className="buttons"
-               onClick={this.handleToggle2}/>
-              <Drawer width={250} openSecondary={true} open={this.state.open2} >
-                  <AppBar showMenuIconButton={false} title="Donors" style={style2}/>
-                  <Donors />
-              </Drawer>
-          </div>
-
-          <div className="signUp">
-            <Link to ="/DoerSignUp"><RaisedButton label="Be a Doer" backgroundColor='#d15e29' style={style} className="buttons"/>
-            </Link>
-            <Link to ="/DonorSignUp"><RaisedButton label="Be a Donor" backgroundColor='#d15e29' style={style} className="buttons"/>
-            </Link>
-          </div>
-          <footer>
-          </footer>
-        </div>
+            <footer className='footer'>
+            </footer>
+      </div>
       </MuiThemeProvider>
 
     );

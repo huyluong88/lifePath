@@ -14,6 +14,7 @@ import './index.css';
 import firebase from './config'
 import Snackbar from 'material-ui/Snackbar';
 import { Link } from 'react-router';
+import pic from './lifepathlogo.png';
 
 const style = {
   marginLeft: 20,
@@ -22,7 +23,7 @@ const style = {
     borderColor: '#d15e29',
   },
   floatingLabelStyle: {
-    color: '#d15e29',
+    color: 'black',
   },
 }
 const style2 ={
@@ -101,31 +102,31 @@ addDoer(e) {
             },
             key: this.state.doers.length,
             performance: {
-                ninetydayGoals: [{
-                    category: "",
-                    owner: "",
-                    smartGoals: "",
-                    dateSet: "",
-                    endDate: "",
-                    goalMet: ""
-                }],
-                weeklyScore: [{
-                    category: "",
-                    owner: "",
-                    measurable: "",
-                    goal: "",
-                    weekbegin: "",
-                    weekEnd: ""
-                }],
-                yearand3years: [{
-                    category: "",
-                    owner: "",
-                    smartGoals: "",
-                    dateSet: "",
-                    endDate: "",
-                    goalMet: ""
-                }]
-            }
+               ninetydayGoals: [{
+                   category: "Fundraising",
+                   owner: "Esther",
+                   smartGoals: "Donors Calls",
+                   dateSet: "06-03-2016",
+                   endDate: "07-14-2016",
+                   goalMet: "Yes"
+               }],
+               weeklyScore: [{
+                   category: "Marketing",
+                   owner: "Jewel",
+                   measurable: "Facebook Post",
+                   goal: "2",
+                   weekbegin: "06-03-2016",
+                   weekEnd: "07-14-2016"
+               }],
+               yearand3years: [{
+                   category: "Finance/Acct",
+                   owner: "Michael",
+                   smartGoals: "Reconcile Accounts",
+                   dateSet: "06-03-2016",
+                   endDate: "07-14-2016",
+                   goalMet: "No"
+               }]
+           }
         }
         let newDoersArray = this.state.doers.concat(newDoer)
         base.createUser({
@@ -162,6 +163,12 @@ render (){
   return(
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
     <section className="userCreation">
+    <header className="App-header">
+      <div className="logo">
+        <img src= { pic }/>
+      </div>
+    </header>
+
        <h1>Create your Doer account</h1>
         <TextField
          className='input'
@@ -176,6 +183,8 @@ render (){
          floatingLabelText="Last Name"
          type="text"
          style={style}
+         floatingLabelStyle={style.floatingLabelStyle}
+         underlineFocusStyle={style.underlineStyle}
         /> <br/>
         <TextField
          ref={input => this.email = input}
@@ -183,12 +192,16 @@ render (){
          type="text"
          style={style}
          floatingLabelFixed={false}
+         floatingLabelStyle={style.floatingLabelStyle}
+         underlineFocusStyle={style.underlineStyle}
         /> <br/>
         <TextField
          ref={input => this.password = input}
          floatingLabelText="password"
          type="password"
          style={style}
+         floatingLabelStyle={style.floatingLabelStyle}
+         underlineFocusStyle={style.underlineStyle}
         /> <br />
 
         <div className='userSignUp2'>
@@ -198,10 +211,8 @@ render (){
               <option value='Foundation'>Foundation</option>
               <option value='Non-Profit'>Non-Profit</option>
             </select> <br/>
-
+            <h1>Upload your profile image</h1>
             <input className='upload' type='file' ref={element => this.photo = element} onChange={(e)=>this.handleImageChange(e)}/>
-            <h1>files</h1>
-            <input className='upload' type='file'  onChange={(e)=>this.handleFile(e)}/>
 
         </div>
         <div className='userSignUp'>
@@ -311,3 +322,8 @@ export default DoerSignUp
 //   <MenuItem value="Foundation" key={2} primaryText="Foundation" />
 //   <MenuItem value="Non-Profit" key={3} primaryText="Non-Profit" />
 // </SelectField>
+
+
+
+// <h1>files</h1>
+// <input className='upload' type='file'  onChange={(e)=>this.handleFile(e)}/>

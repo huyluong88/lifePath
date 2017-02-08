@@ -6,6 +6,16 @@ import { Link } from 'react-router'
 import DoerProfile from './DoerProfile'
 import TextField from 'material-ui/TextField';
 
+const styles = {
+  marginLeft: 20,
+  width: 300,
+  underlineStyle: {
+    borderColor: '#d15e29',
+  },
+  floatingLabelStyle: {
+    color: 'white',
+  },
+}
 
 class Doers extends Component {
     constructor() {
@@ -60,6 +70,9 @@ class Doers extends Component {
        ref={input => this.searchDoer = input}
        floatingLabelText="Search for a doer"
        type="text"
+       style={styles}
+       floatingLabelStyle={styles.floatingLabelStyle}
+       underlineFocusStyle={styles.underlineStyle}
       />
 
       <FlatButton

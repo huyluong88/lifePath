@@ -2,7 +2,7 @@ body {
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    background-color: 'white';
+    background-color: #d9dce0;
 }
 /*#a5a9af*/
 header {
@@ -63,6 +63,7 @@ img {
     border-collapse: collapse;
     border-spacing: 0;
     border-color: #aabcfe;
+    text-align: center;
 }
 
 .tg td {
@@ -90,15 +91,20 @@ img {
     border-color: #aabcfe;
     color: #039;
     background-color: #b9c9fe;
+
 }
 
 .tg .tg-yw4l {
-    vertical-align: top
+    vertical-align: top;
+
 }
 
 .tg .tg-6k2t {
     background-color: #D2E4FC;
-    vertical-align: top
+    vertical-align: top;
+}
+table {
+  margin: auto;
 }
 
 .userCreation {
@@ -165,4 +171,16 @@ img {
 .info {
  display: flex;
  align-items: center;
+}
+.tab {
+  color: white;
+  background-color: #d15e29;
+  border-radius: 5px;
+  opacity: 0.6;
+  width: 8em;
+}
+.footer {
+  width: 100%;
+  height: 50%;
+  background-color: 'blue';
 }
