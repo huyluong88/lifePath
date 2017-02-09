@@ -3,7 +3,7 @@ import base  from './config';
 import { withRouter } from 'react-router';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
 import Divider from 'material-ui/Divider';
@@ -11,10 +11,17 @@ import AppBar from 'material-ui/AppBar';
 import firebase from './config'
 import Snackbar from 'material-ui/Snackbar';
 import { Link } from 'react-router';
-
+import pic from './lifepathlogo.png';
 
 const style = {
   marginLeft: 20,
+  width: 300,
+  underlineStyle: {
+    borderColor: '#d15e29',
+  },
+  floatingLabelStyle: {
+    color: 'black',
+  },
 }
 const style2 ={
   backgroundColor: '#5b453b',
@@ -70,22 +77,31 @@ addDonor(e){
       alert('password must be 6 or more characters')
   } else {
   let newDonor = {
-    general: { firstName : this.firstN.input.value, lastName: this.lastN.input.value, toE: this.toE.value,
-                industry: '', interest: '', award: ''},
-    purpose: { ourStory: '', focusMission: '', niche: ''},
-    contact: { email: this.email.input.value, phone: '', website: ''},
-    key: this.state.donors.length,
-    employees: {
-        employee1: {
-            employee1name: '',
-            // employee1pic: this.employee2l.value
-        },
-        employee2: {
-            employee2name: '',
-            // employee2pic: this.employee2f.value
-        }
-
-  }
+          general: {
+              organization: this.organization.input.value,
+              firstName: this.firstN.input.value,
+              lastName: this.lastN.input.value,
+              toE: this.toE.value,
+              industry: '',
+              interest: '',
+          },
+          purpose: {
+              ourStory: '',
+              focusMission: '',
+              niche: ''
+          },
+          contact: {
+              email: this.email.input.value,
+              phone: '',
+              website: ''
+          },
+          key: this.state.donors.length,
+          employees: [
+            {employeeName: "Add employees"}
+          ],
+          training: [
+              {trainerName: "Name of Trainer", trainerLink: "URL"},
+          ]
 }
 
   let newDonorsArray = this.state.donors.concat(newDonor)
@@ -114,66 +130,81 @@ addDonor(e){
 
 render (){
   return(
-    <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-    <section>
-    <AppBar
-    title="Create your Donor account"
-    showMenuIconButton={false}
-    style={style2}
-    />
+    <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+    <section className='userCreation'>
+    <header className="App-header">
+      <div className="logo">
+        <img src= { pic }/>
+      </div>
+    </header>
+    <h1>Create your Donor account</h1>
+    <TextField
+     className='input'
+     ref={input => this.organization = input}
+     floatingLabelText="Organization Name"
+     type="text"
+     style={style}
+     floatingLabelStyle={style.floatingLabelStyle}
+     underlineFocusStyle={style.underlineStyle}/> <br/>
      <TextField
       className='input'
       ref={input => this.firstN = input}
       floatingLabelText="First Name"
       type="text"
       style={style}
+      floatingLabelStyle={style.floatingLabelStyle}
+      underlineFocusStyle={style.underlineStyle}/> <br/>
 
-      />
-      <Divider style={style3} />
      <TextField
       ref={input => this.lastN = input}
       floatingLabelText="Last Name"
       type="text"
       style={style}
-     />
-     <Divider style={style3} />
+      floatingLabelStyle={style.floatingLabelStyle}
+      underlineFocusStyle={style.underlineStyle}/> <br/>
+
      <TextField
       ref={input => this.email = input}
       floatingLabelText="email"
       type="text"
       style={style}
-     />
-     <Divider style={style3}/>
+      floatingLabelStyle={style.floatingLabelStyle}
+      underlineFocusStyle={style.underlineStyle}/> <br/>
+
      <TextField
       ref={input => this.password = input}
       floatingLabelText="password"
       type="password"
       style={style}
-     /> <br />
-     <Divider style={style3}/>
+      floatingLabelStyle={style.floatingLabelStyle}
+      underlineFocusStyle={style.underlineStyle}/> <br/>
 
+      <div className='userSignUp2'>
      Type of Entity<br />
      <select className='select-style' name='ToE' ref={element => this.toE = element}>
        <option value='Company'>Company</option>
        <option value='Foundation'>Foundation</option>
        <option value='Non-Profit'>Non-Profit</option>
      </select> <br />
-     <Divider style={style3}/>
-
+     <h1>Upload your profile image</h1>
      <input type='file' ref={element => this.photo = element} onChange={(e)=>this.handleImageChange(e)}/>
-   <RaisedButton label="Submit"
-   backgroundColor ='#d15e29'
-   onClick={this.addDonor.bind(this)}/>
-   <Link to ="/">
-   <RaisedButton label="Back to home" backgroundColor='#d15e29' className="buttons"/>
-   </Link>
+   </div>
+
+   <div className='userSignUp'>
+
+     <RaisedButton label="Submit"
+     backgroundColor ='#d15e29'
+     className="buttons"
+     onClick={this.addDonor.bind(this)}/>
+     <Link to ="/donorLogin">
+     <RaisedButton label="Login" backgroundColor='#d15e29' className="buttons"/>
+     </Link>
+   </div>
    <Snackbar
      open={this.state.open}
      message="Thank you for signing up"
      autoHideDuration={5000}
      />
-
-
     </section>
     </MuiThemeProvider>
 

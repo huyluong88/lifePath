@@ -42,7 +42,8 @@ class DoerProfile extends Component {
       ninetydayGoals: [],
       weeklyScore: [],
       yearand3years: [],
-      value: 'a',
+      training: [],
+      beneficiaries: [],
       open: false,
       open2: false
     }
@@ -68,7 +69,9 @@ class DoerProfile extends Component {
         website: data.contact.website,
         ninetydayGoals: data.performance.ninetydayGoals,
         weeklyScore: data.performance.weeklyScore,
-        yearand3years: data.performance.yearand3years
+        yearand3years: data.performance.yearand3years,
+        training: data.training,
+        beneficiaries: data.beneficiaries
       })
       console.log("what is", data)
     }
@@ -95,6 +98,7 @@ componentWillReceiveProps (nextProps) {
        weeklyScore: data.performance.weeklyScore,
        yearand3years: data.performance.yearand3years,
        accountability: data.accountability,
+       training: data.training,
        beneficiaries: data.beneficiaries
      })
    }
@@ -138,6 +142,7 @@ render (){
           selectedIndex={2}>
           <TabList>
                     <Tab className='tab'>About</Tab>
+                    <Tab className='tab'>Beneficiaries</Tab>
                     <Tab className='tab'>Training</Tab>
                     <Tab className='tab'>Performance</Tab>
                     <Tab className='tab'>Accountability</Tab>
@@ -160,9 +165,25 @@ render (){
                 <strong>website: </strong><span>{this.state.website}</span><br/>
 
           </TabPanel>
+
+          <TabPanel>
+          <h2>Beneficiaries</h2>
+          {this.state.beneficiaries.map (info => {
+            return (<p>
+                      {info.beneficiariesName}
+                    </p>)
+          })}
+          </TabPanel>
+
           <TabPanel>
             <h2>Training</h2>
+            {this.state.training.map (info => {
+                return (<div>
+                          {info.trainerName} <a href={info.trainerLink}>{info.trainerLink}</a>
+                          </div>)
+                })}<br/>
           </TabPanel>
+
           <TabPanel>
             <h2>Performance</h2>
               <strong>90 Day Goals</strong>
