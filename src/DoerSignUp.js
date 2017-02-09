@@ -84,6 +84,7 @@ addDoer(e) {
     } else {
         let newDoer = {
             general: {
+                organization: this.organization.input.value,
                 firstName: this.firstN.input.value,
                 lastName: this.lastN.input.value,
                 toE: this.toE.value,
@@ -100,6 +101,12 @@ addDoer(e) {
                 phone: "",
                 website: ""
             },
+            beneficiaries: [
+               {beneficiariesName: "Add Beneficiary Name"},
+           ],
+           training: [
+               {trainerName: "Name of Trainer", trainerLink: "URL"},
+           ],
             key: this.state.doers.length,
             performance: {
                ninetydayGoals: [{
@@ -170,6 +177,14 @@ render (){
     </header>
 
        <h1>Create your Doer account</h1>
+       <TextField
+        className='input'
+        ref={input => this.organization = input}
+        floatingLabelText="Organization Name"
+        type="text"
+        style={style}
+        floatingLabelStyle={style.floatingLabelStyle}
+        underlineFocusStyle={style.underlineStyle}/> <br/>
         <TextField
          className='input'
          ref={input => this.firstN = input}
@@ -221,8 +236,8 @@ render (){
             className='buttons'
             onClick={this.addDoer.bind(this)}/> <br/>
 
-            <Link to ="/">
-            <RaisedButton label="Back to home" backgroundColor='#d15e29' className="buttons"/>
+            <Link to ="/doerLogin">
+            <RaisedButton label="Login" backgroundColor='#d15e29' className="buttons"/>
             </Link>
         </div>
         <Snackbar

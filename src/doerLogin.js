@@ -45,6 +45,8 @@ class doerLogin extends Component {
             ninetydayGoals: [],
             weeklyScore: [],
             yearand3years: [],
+            beneficiaries: [],
+            training: [],
             open: false,
             open2: false,
             open3: false,
@@ -52,9 +54,12 @@ class doerLogin extends Component {
             open5: false,
             open6: false,
             open7: false,
+            open8: false,
+            open9: false,
             testingPhoto: 'nothing yet',
             capDoer: [],
-            getDoc: ''
+            getDoc: '',
+            text:''
         }
     }
     componentDidMount() {
@@ -131,6 +136,8 @@ class doerLogin extends Component {
                 then: (doer) => {
                     this.setState({
                         userName: doerEmail,
+                        beneficiaries: this.state.doer.beneficiaries,
+                        training: this.state.doer.training,
                         ninetydayGoals: this.state.doer.performance.ninetydayGoals,
                         weeklyScore: this.state.doer.performance.weeklyScore,
                         yearand3years: this.state.doer.performance.yearand3years
@@ -144,10 +151,11 @@ class doerLogin extends Component {
             open: true
         })
     }
-    changeName() {
+    changeNames() {
         this.setState({
             doer: {
                 general: {
+                    organization: this.newOrg.value,
                     firstName: this.newName.value,
                     lastName: this.newLastName.value
                 }
@@ -282,6 +290,55 @@ class doerLogin extends Component {
            }
            })
     }
+    openTrain() {
+     this.setState({
+       open8: true
+     })
+   }
+
+   addTrain () {
+     base.post(`/doers/${this.state.capDoer}/training/${this.state.training.length}`,{
+            data: {
+              trainerName: this.trainer.value,
+              trainerLink: this.link.value,
+            }
+          })
+          base.fetch(`doers/${this.state.capDoer}/training`, {
+            context: this,
+            asArray: true,
+            then: (data) => {
+              this.setState({
+              training: data
+            })
+            console.log('what is ', data)
+          }
+          })
+   }
+
+   openBen() {
+     this.setState({
+       open9: true
+     })
+   }
+
+   addBen () {
+     base.post(`/doers/${this.state.capDoer}/beneficiaries/${this.state.beneficiaries.length}`,{
+            data: {
+              beneficiariesName: this.benName.value,
+            }
+          })
+          base.fetch(`doers/${this.state.capDoer}/beneficiaries`, {
+            context: this,
+            asArray: true,
+            then: (data) => {
+              this.setState({
+              beneficiaries: data
+            })
+            console.log('what is ', data)
+          }
+          })
+   }
+
     handleClose = () => this.setState({
         open: !this.state.open
     });
@@ -303,6 +360,36 @@ class doerLogin extends Component {
     handleClose7 = () => this.setState({
         open7: !this.state.open7
     });
+    handleClose8 = () => this.setState({
+       open8: !this.state.open8
+   });
+   handleClose9 = () => this.setState({
+       open9: !this.state.open9
+   });
+
+   deleteTrain (clickedItem){
+     let training = this.state.training.filter(info =>info !==clickedItem)
+     this.setState({
+       training: training
+     })
+     base.update (`/doers/${this.state.capDoer}`,{
+       data: {
+         training
+       }
+     })
+   }
+
+   deleteBen (clickedItem){
+     let beneficiaries = this.state.beneficiaries.filter(info =>info !==clickedItem)
+     this.setState({
+       beneficiaries: beneficiaries
+     })
+     base.update (`/doers/${this.state.capDoer}`,{
+       data: {
+         beneficiaries
+       }
+     })
+   }
     delete90TableItem (clickedItem){
           console.log('clicked item name is ', clickedItem)
           let ninetydayGoals = this.state.ninetydayGoals.filter(cat=>cat !==clickedItem)
@@ -375,7 +462,34 @@ class doerLogin extends Component {
               }
           })
         }
+        handleChange(event) {
+
+            this.setState({ text: event.target.value });
+          }
+
+          overflowAlert() {
+              if (this.remainingCharacters() < 0) {
+                  var beforeOverflowText = this.state.text.substring(200 - 10, 200);
+                  var overflowText = this.state.text.substring(200);
+                return (
+                  <div className="alert alert-warning">
+                    <strong>Oops! Too Long:</strong>
+                    &nbsp;...{beforeOverflowText}
+                    <strong className="bg-danger">{overflowText}</strong>
+                  </div>
+                );
+              } else {
+                return "";
+              }
+            }
+
+            remainingCharacters() {
+                  return 200 - this.state.text.length;
+              }
+
     render (){
+      console.log("donor key is", this.state.capDoer)
+
     const actions = [
      <RaisedButton
        label="Close"
@@ -425,6 +539,20 @@ class doerLogin extends Component {
       onClick={this.handleClose7}
       />
   ];
+  const actions8 = [
+   <RaisedButton
+     label="Close"
+     primary={true}
+     onClick={this.handleClose8}
+     />
+ ];
+ const actions9 = [
+   <RaisedButton
+     label="Close"
+     primary={true}
+     onClick={this.handleClose9}
+     />
+ ];
   return (
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
     <div className='App'>
@@ -471,10 +599,11 @@ class doerLogin extends Component {
       <div hidden={!this.state.userName}>
         <img src={this.state.testingPhoto}/>
           <section className="info">
-          <h2>Name</h2>
+          <h2>About</h2>
           <FlatButton label="Edit Name" primary={true}
             onClick={this.openEditName.bind(this)}/>
           </section>
+            Organization: {this.state.doer.general.organization}
             <p>{this.state.doer.general.firstName} {this.state.doer.general.lastName}</p>
           <section className="info">
           <h2>Details</h2>
@@ -500,9 +629,36 @@ class doerLogin extends Component {
               <strong>email: </strong><span>{this.state.doer.contact.email}</span><br/>
               <strong>phone: </strong><span>{this.state.doer.contact.phone}</span><br/>
               <strong>website: </strong><a href={this.state.doer.contact.website}>{this.state.doer.contact.website}</a><br/>
+              <section className="info">
+                <h2>Training</h2>
+                <FlatButton label="Add Training Data" primary={true}
+                   onClick={this.openTrain.bind(this)}/>
+             </section>
+                       <strong>Trainer & Video: </strong>{this.state.training.map (info => {
+                           return (<div onDoubleClick={this.deleteTrain.bind(this, info)}>
+                                     {info.trainerName} <a href={info.trainerLink}>{info.trainerLink}</a>
+                                     </div>)
+                           })}<br/>
+
+                           <section className="info">
+                           <h2>Beneficiaries</h2>
+                           <FlatButton label="Add Beneficiaries" primary={true}
+                             onClick={this.openBen.bind(this)}/>
+                           </section>
+                             {this.state.beneficiaries.map (info => {
+                               return (<p onDoubleClick={this.deleteBen.bind(this, info)}>
+                                         {info.beneficiariesName}
+                                       </p>)
+                             })}<br/>
+                            <div>
+                             { this.overflowAlert() }
+                     <textarea className="form-control"
+                               onChange={this.handleChange.bind(this)}></textarea>
+                               <span>{this.remainingCharacters()}</span>
+                               </div>
               <h2>Performance</h2>
               <section className="info">
-                <strong>90 Day Goals</strong>
+                <strong>90 Day Goals(no less than 4, no more than 6 rows)</strong>
                 <FlatButton label="Add Goal" primary={true}
                   onClick={this.openGoal.bind(this)}/>
               </section>
@@ -551,7 +707,7 @@ class doerLogin extends Component {
                    </table><br/>
 
                    <section className="info">
-                   <strong>Weekly Score</strong>
+                   <strong>Weekly Score(up to 15 lines)</strong>
                    <FlatButton label="Add Score" primary={true}
                      onClick={this.openScore.bind(this)}/>
                    </section>
@@ -599,7 +755,7 @@ class doerLogin extends Component {
                    </table><br/>
 
                    <section className="info">
-                   <strong>1 and 3 Year Goal</strong>
+                   <strong>1 and 3 Year Goal(no less than 1, no more than 7 rows)</strong>
                    <FlatButton label="Add Year Goals" primary={true}
                      onClick={this.openYear.bind(this)}/>
                    </section>
@@ -656,10 +812,14 @@ class doerLogin extends Component {
                    Your doc: <a href={this.state.getDoc}>Link to yout doc</a>
              </div>
              <Dialog
-               title="Change Both First & Last Name"
+               title="Change Organization, First, & Last Name"
                actions={actions}
                open={this.state.open}
               >
+              <input type="text" placeholder="organization name"
+              ref={element => this.newOrg = element}
+              defaultValue={this.state.doer.general.organization}
+              /><br/>
               <input type="text" placeholder="change first name"
               ref={element => this.newName = element}
               defaultValue={this.state.doer.general.firstName}
@@ -668,7 +828,7 @@ class doerLogin extends Component {
               ref={element => this.newLastName = element}
               defaultValue={this.state.doer.general.lastName}
               /><br/>
-              <RaisedButton label="Submit" primary={true} onClick={this.changeName.bind(this)}/>
+              <RaisedButton label="Submit" primary={true} onClick={this.changeNames.bind(this)}/>
               </Dialog>
 
               <Dialog
@@ -795,9 +955,25 @@ class doerLogin extends Component {
                  <select ref={element => this.yearGoal = element}>
                    <option value='Yes'>Yes</option>
                    <option value='No'>No</option>
-</select>
-<RaisedButton label="+" primary={true} onClick={this.addYear.bind(this)}/>
-</Dialog>
+              </select>
+              <RaisedButton label="+" primary={true} onClick={this.addYear.bind(this)}/>
+    </Dialog>
+          <Dialog
+              title="Add Training Information"
+              actions={actions8}
+              open={this.state.open8}>
+              <input placeholder="Trainer Name" ref={element => this.trainer = element}/>
+              <input placeholder="Training Link" ref={element => this.link = element}/>
+              <RaisedButton label="Add Training" primary={true} onClick={this.addTrain.bind(this)}/>
+           </Dialog>
+
+           <Dialog
+              title="Add Beneficiary Name"
+              actions={actions9}
+              open={this.state.open9}>
+              <input placeholder="Beneficiary Name" ref={element => this.benName = element}/>
+              <RaisedButton label="Add Beneficiary" primary={true} onClick={this.addBen.bind(this)}/>
+            </Dialog>
 </div>
 </MuiThemeProvider>
 )
