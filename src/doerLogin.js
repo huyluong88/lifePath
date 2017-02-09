@@ -53,7 +53,8 @@ class doerLogin extends Component {
             open6: false,
             open7: false,
             testingPhoto: 'nothing yet',
-            capDoer: []
+            capDoer: [],
+            getDoc: ''
         }
     }
     componentDidMount() {
@@ -302,19 +303,78 @@ class doerLogin extends Component {
     handleClose7 = () => this.setState({
         open7: !this.state.open7
     });
-    deleteTableItem (clickedItem){
-      console.log('clicked item name is ', clickedItem)
-      let ninetydayGoals = this.state.ninetydayGoals.filter(cat=>cat !==clickedItem)
-      this.setState({
-        ninetydayGoals: ninetydayGoals
-      })
-      base.update (`/doers/${this.state.capDoer}/performance/`,{
-        data: {
-          ninetydayGoals
+    delete90TableItem (clickedItem){
+          console.log('clicked item name is ', clickedItem)
+          let ninetydayGoals = this.state.ninetydayGoals.filter(cat=>cat !==clickedItem)
+          this.setState({
+            ninetydayGoals: ninetydayGoals
+          })
+          base.update (`/doers/${this.state.capDoer}/performance/`,{
+            data: {
+              ninetydayGoals
+            }
+          })
         }
-      })
-    }
-
+        deleteWeeklyTableItem(clickedItem){
+          let weeklyScore = this.state.weeklyScore.filter(cat=>cat !==clickedItem)
+          this.setState({
+            weeklyScore: weeklyScore
+          })
+          base.update (`/doers/${this.state.capDoer}/performance/`,{
+            data: {
+              weeklyScore
+            }
+          })
+        }
+        deleteYearlyTableItem(clickedItem){
+          let yearand3years = this.state.yearand3years.filter(cat=>cat !==clickedItem)
+          this.setState({
+            yearand3years: yearand3years
+          })
+          base.update (`/doers/${this.state.capDoer}/performance/`,{
+            data: {
+              yearand3years
+            }
+          })
+        }
+        handleChangeDocs(e){
+            e.preventDefault()
+            let reader = new FileReader()
+            let file = e.target.files[0];
+            let doersArr = this.state.doers.length - 1
+            console.log('arr length is ', doersArr)
+            const storageRef = firebase.storage().ref(`doer/docs/${doersArr}`)
+            const task = storageRef.put(file)
+        }
+        getDocs(){
+          let storageRef = firebase.storage();
+          let starsRef = storageRef.ref(`doer/docs/${this.state.capDoer}`);
+          starsRef.getDownloadURL().then((url) => {
+              console.log('DL is ', url)
+              this.setState({
+                getDoc: url
+              })
+          }).catch(function(error) {
+              switch (error.code) {
+                  case 'storage/object_not_found':
+                      // File doesn't exist
+                      console.log('file does not exist')
+                      break;
+                  case 'storage/unauthorized':
+                      // User doesn't have permission to access the object
+                      console.log('no permission')
+                      break;
+                  case 'storage/canceled':
+                      // User canceled the upload
+                      console.log('cancelled the upload')
+                      break;
+                  case 'storage/unknown':
+                      // Unknown error occurred, inspect the server response
+                      console.log('unknow occured')
+                      break;
+              }
+          })
+        }
     render (){
     const actions = [
      <RaisedButton
@@ -458,33 +518,33 @@ class doerLogin extends Component {
                    <tr>
                    <td className="tg-6k2t">
                      {this.state.ninetydayGoals.map (cat => {
-                       return (<tr>{cat.category}
-                         <button onClick={this.deleteTableItem.bind(this, cat)}>X</button></tr>)
+                       return (<tr onDoubleClick={this.delete90TableItem.bind(this, cat)}>{cat.category}
+                        </tr>)
                      })}
                    </td>
                    <td className="tg-6k2t">
-                     {this.state.ninetydayGoals.map (stuff => {
-                       return (<tr >{stuff.owner}</tr>)
+                     {this.state.ninetydayGoals.map (owner => {
+                       return (<tr >{owner.owner}</tr>)
                      })}
                    </td>
                    <td className="tg-6k2t">
-                     {this.state.ninetydayGoals.map (stuff => {
-                       return (<tr >{stuff.smartGoals}</tr>)
+                     {this.state.ninetydayGoals.map (smartG => {
+                       return (<tr >{smartG.smartGoals}</tr>)
                      })}
                    </td>
                    <td className="tg-6k2t">
-                     {this.state.ninetydayGoals.map (stuff => {
-                       return (<tr >{stuff.dateSet}</tr>)
+                     {this.state.ninetydayGoals.map (dateS => {
+                       return (<tr >{dateS.dateSet}</tr>)
                      })}
                    </td>
                    <td className="tg-6k2t">
-                     {this.state.ninetydayGoals.map (stuff => {
-                       return (<tr >{stuff.endDate}</tr>)
+                     {this.state.ninetydayGoals.map (endD => {
+                       return (<tr >{endD.endDate}</tr>)
                      })}
                    </td>
                    <td className="tg-6k2t">
-                     {this.state.ninetydayGoals.map (stuff => {
-                       return (<tr >{stuff.goalMet}</tr>)
+                     {this.state.ninetydayGoals.map (goalM => {
+                       return (<tr >{goalM.goalMet}</tr>)
                      })}
                    </td>
                    </tr>
@@ -506,33 +566,33 @@ class doerLogin extends Component {
                     </tr>
                     <tr>
                     <td className="tg-6k2t">
-                      {this.state.weeklyScore.map (stuff => {
-                        return (<tr >{stuff.category}</tr>)
+                      {this.state.weeklyScore.map (cat => {
+                        return (<tr onDoubleClick={this.deleteWeeklyTableItem.bind(this, cat)}>{cat.category}</tr>)
                       })}
                     </td>
                     <td className="tg-6k2t">
-                      {this.state.weeklyScore.map (stuff => {
-                        return (<tr >{stuff.owner}</tr>)
+                      {this.state.weeklyScore.map (owner => {
+                        return (<tr >{owner.owner}</tr>)
                       })}
                     </td>
                     <td className="tg-6k2t">
-                      {this.state.weeklyScore.map (stuff => {
-                        return (<tr >{stuff.measurable}</tr>)
+                      {this.state.weeklyScore.map (measurable => {
+                        return (<tr >{measurable.measurable}</tr>)
                       })}
                     </td>
                     <td className="tg-6k2t">
-                      {this.state.weeklyScore.map (stuff => {
-                        return (<tr >{stuff.goal}</tr>)
+                      {this.state.weeklyScore.map (goal => {
+                        return (<tr >{goal.goal}</tr>)
                       })}
                     </td>
                     <td className="tg-6k2t">
-                      {this.state.weeklyScore.map (stuff => {
-                        return (<tr >{stuff.weekbegin}</tr>)
+                      {this.state.weeklyScore.map (weekB => {
+                        return (<tr >{weekB.weekbegin}</tr>)
                       })}
                     </td>
                     <td className="tg-6k2t">
-                      {this.state.weeklyScore.map (stuff => {
-                        return (<tr >{stuff.weekEnd}</tr>)
+                      {this.state.weeklyScore.map (weekE => {
+                        return (<tr >{weekE.weekEnd}</tr>)
                       })}
                     </td>
                     </tr>
@@ -554,39 +614,47 @@ class doerLogin extends Component {
                     </tr>
                     <tr>
                     <td className="tg-6k2t">
-                      {this.state.yearand3years.map (stuff => {
-                        return (<tr >{stuff.category}</tr>)
+                      {this.state.yearand3years.map (cat => {
+                        return (<tr onDoubleClick={this.deleteYearlyTableItem.bind(this, cat)}>{cat.category}</tr>)
                       })}
                     </td>
                     <td className="tg-6k2t">
-                      {this.state.yearand3years.map (stuff => {
-                        return (<tr >{stuff.owner}</tr>)
+                      {this.state.yearand3years.map (owner => {
+                        return (<tr >{owner.owner}</tr>)
                       })}
                     </td>
                     <td className="tg-6k2t">
-                      {this.state.yearand3years.map (stuff => {
-                        return (<tr >{stuff.smartGoals}</tr>)
+                      {this.state.yearand3years.map (smartG => {
+                        return (<tr >{smartG.smartGoals}</tr>)
                       })}
                     </td>
                     <td className="tg-6k2t">
-                      {this.state.yearand3years.map (stuff => {
-                        return (<tr >{stuff.dateSet}</tr>)
+                      {this.state.yearand3years.map (dataS => {
+                        return (<tr >{dataS.dateSet}</tr>)
                       })}
                     </td>
                     <td className="tg-6k2t">
-                      {this.state.yearand3years.map (stuff => {
-                        return (<tr >{stuff.endDate}</tr>)
+                      {this.state.yearand3years.map (endD => {
+                        return (<tr >{endD.endDate}</tr>)
                       })}
                     </td>
                     <td className="tg-6k2t">
-                      {this.state.yearand3years.map (stuff => {
-                        return (<tr >{stuff.goalMet}</tr>)
+                      {this.state.yearand3years.map (goalM => {
+                        return (<tr >{goalM.goalMet}</tr>)
                       })}
                     </td>
                     </tr>
                    </table>
+                   <h2>accountability</h2>
+                   <h5>Upload a document</h5>
+                   <input className='upload' type='file' onChange={(e)=>this.handleChangeDocs(e)}/>
+                   <RaisedButton
+                   label='Retrieve doc'
+                   backgroundColor='#d15e29'
+                   onClick={this.getDocs.bind(this)}/>
+                   Instruction: Retrieve your document first before visiting the link.
+                   Your doc: <a href={this.state.getDoc}>Link to yout doc</a>
              </div>
-
              <Dialog
                title="Change Both First & Last Name"
                actions={actions}
