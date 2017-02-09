@@ -25,9 +25,13 @@
                 "financialHighs": "string"
             },
             "beneficiaries": [
-                {"beneficiaries1": "string"},
-                {"beneficiaries2": "TIY"}
+                {"beneficiariesName": "string"},
+                {"beneficiariesName": "TIY"}
             ],
+            "training": [
+               {"trainerName": "name", "trainerLink": "url"},
+               {"trainerName": "name2", "trainerLink": "url2"}
+           ],
             "performance": {
                 "ninetydayGoals": [{
                     "category": "Fund",
@@ -136,9 +140,13 @@
                 "financialHighs": "FinanceStuff"
             },
             "beneficiaries": [
-                {"beneficiaries1": "Description & Link"},
-                {"beneficiaries2": "Description & Link"}
+                {"beneficiariesName": "Description & Link"},
+                {"beneficiariesName": "Description & Link"}
             ],
+            "training": [
+               {"trainerName": "name", "trainerLink": "url"},
+               {"trainerName": "name2", "trainerLink": "url2"}
+           ],
             "performance": {
                 "ninetydayGoals": [{
                     "category": "String",
@@ -173,8 +181,7 @@
                 "lastName": "Gates",
                 "toE": "string",
                 "industry": "String",
-                "interest": "string",
-                "award": "String"
+                "interest": "string"
             },
             "purpose": {
                 "ourStory": "String",
@@ -186,16 +193,14 @@
                 "phone": 9685674534,
                 "website": "asdasd.com"
             },
-            "employees": {
-                "employee1": {
-                    "employee1name": "name",
-                    "employee1pic": "Employee1pic"
-                },
-                "employee2": {
-                    "employee2name": "name",
-                    "employee2pic": "Employee2pic"
-                }
-            }
+            "training": [
+               {"trainerName": "name", "trainerLink": "url"},
+               {"trainerName": "name2", "trainerLink": "url2"}
+           ],
+            "employees": [
+                {"employeeName": "name"},
+                {"employeeName": "name2"}
+            ]
         },
         {
             "general": {
@@ -203,8 +208,7 @@
                 "lastName": "Miller",
                 "toE": "string",
                 "industry": "String",
-                "interest": "string",
-                "award": "String"
+                "interest": "string"
             },
             "purpose": {
                 "ourStory": "String",
@@ -216,16 +220,14 @@
                 "phone": 643728,
                 "website": "asdasd.com"
             },
-            "employees": {
-                "employee1": {
-                    "employee1name": "name",
-                    "employee1pic": "Employee1pic"
-                },
-                "employee2": {
-                    "employee2name": "name",
-                    "employee2pic": "Employee2pic"
-                }
-            }
+            "training": [
+               {"trainerName": "name", "trainerLink": "url"},
+               {"trainerName": "name2", "trainerLink": "url2"}
+           ],
+            "employees": [
+                {"employeeName": "name"},
+                {"employeeName": "name2"}
+            ]
         }
     ]
 }

@@ -171,7 +171,9 @@ table {
 .info {
  display: flex;
  align-items: center;
+ justify-content: center;
 }
+
 .tab {
   color: white;
   background-color: #d15e29;

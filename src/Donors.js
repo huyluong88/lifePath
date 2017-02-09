@@ -76,7 +76,7 @@ render (){
     <div>
     <TextField
      ref={input => this.searchDonor = input}
-     floatingLabelText="Search for a doer"
+     floatingLabelText="Search for a donor"
      type="text"
      style={styles}
      floatingLabelStyle={styles.floatingLabelStyle}
