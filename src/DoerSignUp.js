@@ -101,6 +101,8 @@ addDoer(e) {
                 phone: "",
                 website: ""
             },
+            success: "Definie Sucess",
+            outcome: "Define Outcome",
             beneficiaries: [
                {beneficiariesName: "Add Beneficiary Name"},
            ],
@@ -251,94 +253,3 @@ render (){
 }
 }
 export default DoerSignUp
-// <input placeholder="industry" ref={element => this.industry = element}/>
-// <input placeholder="award" ref={element => this.award = element}/>
-// <h1>Purpose</h1>
-// <input placeholder="ourStory" ref={element => this.ourStory = element}/>
-// <input placeholder="focusMission" ref={element => this.focusMission = element}/>
-// <input placeholder="niche" ref={element => this.niche = element}/>
-// <h1>Performance</h1>
-// <p><strong>Just One Goal for Each section</strong></p>
-//   <h3>90 Day Goals</h3>
-//   Category:
-//     <select ref={element => this.category = element}>
-//       <option value='Marketing'>Marketing</option>
-//       <option value='Donor Development'>Donor Development</option>
-//       <option value='Operations'>Operations</option>
-//       <option value='Strategy'>Strategy</option>
-//       <option value='Culture'>Culture</option>
-//       <option value='Finance'>Finance</option>
-//       <option value='Accounting'>Accounting</option>
-//       <option value='Legal'>Legal</option>
-//     </select>
-//     <input placeholder="Owner" ref={element => this.owner = element}/>
-//     <input placeholder="S.M.A.R.T. Goals" ref={element => this.smartGoals = element}/>
-//     Date Started: <input type="date"  ref={element => this.datestart = element}/>
-//     Date End: <input type="date"  ref={element => this.datesend = element}/>
-//     Goal Met:
-//     <select ref={element => this.goal = element}>
-//       <option value='Yes'>Yes</option>
-//       <option value='No'>No</option>
-//     </select>
-//     <h3>Weekly Scorecard</h3>
-//     <select ref={element => this.weeklyCategory = element}>
-//       <option value='Marketing'>Marketing</option>
-//       <option value='Donor Development'>Donor Development</option>
-//       <option value='Operations'>Operations</option>
-//       <option value='Strategy'>Strategy</option>
-//       <option value='Culture'>Culture</option>
-//       <option value='Finance'>Finance</option>
-//       <option value='Accounting'>Accounting</option>
-//       <option value='Legal'>Legal</option>
-//     </select>
-//     <input placeholder="Owner" ref={element => this.weeklyOwner = element}/>
-//     <input placeholder="Measurable" ref={element => this.measurable = element}/>
-//     <input placeholder="Goal" ref={element => this.weeklyGoal = element}/>
-//     Date Started: <input type="date"  ref={element => this.weeklyDatestart = element}/>
-//     Date End: <input type="date"  ref={element => this.weeklyDatesend = element}/>
-//     <h3>1 and 3 year goals</h3>
-//     <select ref={element => this.yearCategory = element}>
-//       <option value='Marketing'>Marketing</option>
-//       <option value='Donor Development'>Donor Development</option>
-//       <option value='Operations'>Operations</option>
-//       <option value='Strategy'>Strategy</option>
-//       <option value='Culture'>Culture</option>
-//       <option value='Finance'>Finance</option>
-//       <option value='Accounting'>Accounting</option>
-//       <option value='Legal'>Legal</option>
-//     </select>
-//     <input placeholder="Owner" ref={element => this.yearOwner = element}/>
-//     <input placeholder="S.M.A.R.T. Goals" ref={element => this.yearSmartGoals = element}/>
-//     Date Started: <input type="date"  ref={element => this.yearDatestart = element}/>
-//     Date End: <input type="date"  ref={element => this.yearDatesend = element}/>
-//     Goal Met:
-//     <select ref={element => this.yearGoal = element}>
-//       <option value='Yes'>Yes</option>
-//       <option value='No'>No</option>
-//     </select>
-// <h1>Contact</h1>
-// <input placeholder="phone" ref={element => this.phone = element}/>
-// <input placeholder="website" ref={element => this.website = element}/>
-
-// <input placeholder="email" ref={element => this.email = element}/>
-// <input
-// ref={node => this.password = node}
-// placeholder="password"
-// type='password' />
-
-// <SelectField
-//   floatingLabelText="Type of Entity"
-//   value={this.state.value}
-//   onChange={this.handleChange}
-//   maxHeight={300}
-//   ref={input => this.value= input}
-//   >
-//   <MenuItem value="Company" key={1} primaryText="Company" />
-//   <MenuItem value="Foundation" key={2} primaryText="Foundation" />
-//   <MenuItem value="Non-Profit" key={3} primaryText="Non-Profit" />
-// </SelectField>
-
-
-
-// <h1>files</h1>
-// <input className='upload' type='file'  onChange={(e)=>this.handleFile(e)}/>
