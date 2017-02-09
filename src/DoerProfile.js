@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Dialog from 'material-ui/Dialog';
+import firebase from './config'
 import base from './config';
 import './index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -45,12 +46,39 @@ class DoerProfile extends Component {
       training: [],
       beneficiaries: [],
       open: false,
-      open2: false
+      open2: false,
+      testingPhoto: 'nothing yet',
     }
   }
   handleToggle = () => this.setState({open: !this.state.open});
   handleToggle2 = () => this.setState({open2: !this.state.open2});
   componentDidMount () {
+    let storageRef = firebase.storage();
+    let starsRef = storageRef.ref(`doer/${this.props.params.name}`);
+    starsRef.getDownloadURL().then((url) => {
+        console.log('DL is ', url)
+        const testingPic = url
+        console.log('DL 2 is ', testingPic)
+        this.setState({
+            testingPhoto: testingPic
+        })
+    }).catch(function(error) {
+        switch (error.code) {
+            case 'storage/object_not_found':
+                console.log('file does not exist')
+                break;
+            case 'storage/unauthorized':
+                console.log('no permission')
+                break;
+            case 'storage/canceled':
+                console.log('cancelled the upload')
+                break;
+            case 'storage/unknown':
+                console.log('unknow occured')
+                break;
+        }
+    })
+
   base.fetch(`/doers/${this.props.params.name}`, {
     context: this,
     then: (data) => {
@@ -78,6 +106,31 @@ class DoerProfile extends Component {
   })
 }
 componentWillReceiveProps (nextProps) {
+  let storageRef = firebase.storage();
+  let starsRef = storageRef.ref(`doer/${this.props.params.name}`);
+  starsRef.getDownloadURL().then((url) => {
+      console.log('DL is ', url)
+      const testingPic = url
+      console.log('DL 2 is ', testingPic)
+      this.setState({
+          testingPhoto: testingPic
+      })
+  }).catch(function(error) {
+      switch (error.code) {
+          case 'storage/object_not_found':
+              console.log('file does not exist')
+              break;
+          case 'storage/unauthorized':
+              console.log('no permission')
+              break;
+          case 'storage/canceled':
+              console.log('cancelled the upload')
+              break;
+          case 'storage/unknown':
+              console.log('unknow occured')
+              break;
+      }
+  })
  base.fetch(`/doers/${this.props.params.name}`, {
    context: this,
    then: (data) => {
@@ -136,7 +189,8 @@ render (){
                    <Donors />
                </Drawer>
           </div>
-        <h1>{this.state.firstName}: Information</h1>
+        <h1>{this.state.firstName}: Information</h1><br/>
+        <img src={this.state.testingPhoto}/>
         <Tabs
           onSelect={this.handleSelect}
           selectedIndex={2}>
