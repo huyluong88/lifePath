@@ -38,6 +38,7 @@ class doerLogin extends Component {
             doer: {
                 general: {},
                 contact: {},
+                success: "",
                 beneficiaries: {},
                 accountability: {},
                 purpose: {},
@@ -56,6 +57,8 @@ class doerLogin extends Component {
             open7: false,
             open8: false,
             open9: false,
+            open10: false,
+            open11: false,
             testingPhoto: 'nothing yet',
             capDoer: [],
             getDoc: '',
@@ -103,7 +106,6 @@ class doerLogin extends Component {
             let storageRef = firebase.storage();
             let starsRef = storageRef.ref(`doer/${doer[0].key}`);
             starsRef.getDownloadURL().then((url) => {
-                // Insert url into an <img> tag to "download"
                 console.log('DL is ', url)
                 const testingPic = url
                 console.log('DL 2 is ', testingPic)
@@ -113,19 +115,15 @@ class doerLogin extends Component {
             }).catch(function(error) {
                 switch (error.code) {
                     case 'storage/object_not_found':
-                        // File doesn't exist
                         console.log('file does not exist')
                         break;
                     case 'storage/unauthorized':
-                        // User doesn't have permission to access the object
                         console.log('no permission')
                         break;
                     case 'storage/canceled':
-                        // User canceled the upload
                         console.log('cancelled the upload')
                         break;
                     case 'storage/unknown':
-                        // Unknown error occurred, inspect the server response
                         console.log('unknow occured')
                         break;
                 }
@@ -339,6 +337,34 @@ class doerLogin extends Component {
           })
    }
 
+   openDef() {
+     this.setState({
+       open10: true
+     })
+   }
+
+   addSuc() {
+     this.setState({
+         doer: {
+             success: this.newSuc.value
+         }
+     })
+   }
+
+   openOut() {
+     this.setState({
+       open11: true
+     })
+   }
+
+   addOut() {
+     this.setState({
+         doer: {
+             outcome: this.newOut.value
+         }
+     })
+   }
+
     handleClose = () => this.setState({
         open: !this.state.open
     });
@@ -365,6 +391,12 @@ class doerLogin extends Component {
    });
    handleClose9 = () => this.setState({
        open9: !this.state.open9
+   });
+   handleClose10 = () => this.setState({
+       open10: !this.state.open10
+   });
+   handleClose11 = () => this.setState({
+       open11: !this.state.open11
    });
 
    deleteTrain (clickedItem){
@@ -553,6 +585,23 @@ class doerLogin extends Component {
      onClick={this.handleClose9}
      />
  ];
+
+ const actions10 = [
+   <RaisedButton
+     label="Close"
+     primary={true}
+     onClick={this.handleClose10}
+     />
+ ];
+
+ const actions11 = [
+   <RaisedButton
+     label="Close"
+     primary={true}
+     onClick={this.handleClose11}
+     />
+ ];
+
   return (
     <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
     <div className='App'>
@@ -621,6 +670,7 @@ class doerLogin extends Component {
             <strong>Our Story: </strong><span>{this.state.doer.purpose.ourStory}</span><br/>
             <strong>Focus/Mission: </strong><span>{this.state.doer.purpose.focusMission}</span><br/>
             <strong>niche: </strong><span>{this.state.doer.purpose.niche}</span>
+
             <section className="info">
             <h2>Contact Information</h2>
             <FlatButton label="Edit Contact Info" primary={true}
@@ -650,12 +700,24 @@ class doerLogin extends Component {
                                          {info.beneficiariesName}
                                        </p>)
                              })}<br/>
-                            <div>
-                             { this.overflowAlert() }
-                     <textarea className="form-control"
-                               onChange={this.handleChange.bind(this)}></textarea>
-                               <span>{this.remainingCharacters()}</span>
-                               </div>
+
+                             <section className="info">
+                             <h2>Define Success</h2>
+                             </section>
+                               <strong>Our Definition for Success</strong>
+                               <FlatButton label="Define It" primary={true}
+                                 onClick={this.openDef.bind(this)}/><br/>
+                               <span>{this.state.doer.success}</span><br/>
+
+                               <section className="info">
+                               <h2>Expected Outcome</h2>
+                               </section>
+                                 <strong>Our Expected Outcome</strong>
+                                 <FlatButton label="What to Expect" primary={true}
+                                   onClick={this.openOut.bind(this)}/><br/>
+                                 <span>{this.state.doer.outcome}</span><br/>
+
+
               <h2>Performance</h2>
               <section className="info">
                 <strong>90 Day Goals(no less than 4, no more than 6 rows)</strong>
@@ -957,7 +1019,8 @@ class doerLogin extends Component {
                    <option value='No'>No</option>
               </select>
               <RaisedButton label="+" primary={true} onClick={this.addYear.bind(this)}/>
-    </Dialog>
+          </Dialog>
+
           <Dialog
               title="Add Training Information"
               actions={actions8}
@@ -974,6 +1037,32 @@ class doerLogin extends Component {
               <input placeholder="Beneficiary Name" ref={element => this.benName = element}/>
               <RaisedButton label="Add Beneficiary" primary={true} onClick={this.addBen.bind(this)}/>
             </Dialog>
+
+            <Dialog
+               title="Define Success"
+               actions={actions10}
+               open={this.state.open10}>
+               <div>
+                 { this.overflowAlert() }
+                 <textarea className="form-control"
+                 onChange={this.handleChange.bind(this)} ref={element => this.newSuc = element}></textarea>
+                 <span>{this.remainingCharacters()}</span>
+              </div>
+               <RaisedButton label="Add Success" primary={true} onClick={this.addSuc.bind(this)}/>
+             </Dialog>
+
+             <Dialog
+                title="What Do We Expect"
+                actions={actions11}
+                open={this.state.open11}>
+                <div>
+                  { this.overflowAlert() }
+                  <textarea className="form-control"
+                  onChange={this.handleChange.bind(this)} ref={element => this.newOut = element}></textarea>
+                  <span>{this.remainingCharacters()}</span>
+               </div>
+                <RaisedButton label="Add Outcome" primary={true} onClick={this.addOut.bind(this)}/>
+              </Dialog>
 </div>
 </MuiThemeProvider>
 )
