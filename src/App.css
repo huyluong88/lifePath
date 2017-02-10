@@ -24,3 +24,28 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+@media (max-width: 600px) {
+  .App {
+    text-align: justify;
+  }
+  .logoPic {
+  width: 60%;
+  }
+  .App-header {
+  width: 90%;
+  text-align: center;;
+  }
+  .buttons {
+    /*width: 6.5em !important;*/
+    margin-left: -1em !important;
+  }
+  .testDraw {
+   width: 35% !important;
+ }
+ .utilities {
+   flex-direction: column;
+ }
+ .signUp {
+   flex-direction: column;
+ }
+}

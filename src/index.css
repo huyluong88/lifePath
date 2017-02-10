@@ -14,8 +14,6 @@ header {
 .link {
   color: white;
   text-decoration: none;
-  /*display: flex;
-  justify-content: space-between;*/
   padding: 1em;
   font-size: 1.1em;
 }
@@ -49,7 +47,6 @@ img {
 
 .buttons {
     width: 12em;
-    margin: 10px;
 }
 
 .signUp {
@@ -186,3 +183,8 @@ table {
   height: 50%;
   background-color: 'blue';
 }
+/*@media (max-width: 300px) {
+  .testDraw {
+    width: 30% !important;
+  }
+}*/
