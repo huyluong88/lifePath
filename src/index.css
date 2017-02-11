@@ -183,6 +183,10 @@ table {
   height: 50%;
   background-color: 'blue';
 }
+
+.userLogin {
+ margin: 10px;
+}
 /*@media (max-width: 300px) {
   .testDraw {
     width: 30% !important;

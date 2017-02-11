@@ -5,6 +5,7 @@ import './index.css';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -285,6 +286,10 @@ handleClose6 = () => this.setState({open6: !this.state.open6});
     })
   }
 
+  handleSelect(index, last) {
+     console.log('Selected tab: ' + index + ', Last tab: ' + last);
+   }
+
 render (){
   console.log("donor key is", this.state.capDonor)
   const actions = [
@@ -385,6 +390,16 @@ const actions6 = [
       <div hidden={!this.state.userName}>
 
           <img src={this.state.testingPhoto}/>
+
+          <Tabs
+            onSelect={this.handleSelect}
+            selectedIndex={2}>
+            <TabList>
+                      <Tab className='tab'>About</Tab>
+                      <Tab className='tab'>Training</Tab>
+                      <Tab className='tab'>Employees</Tab>
+            </TabList>
+            <TabPanel>
           <section className="info">
           <h2>About</h2>
           <FlatButton label="Edit Name" primary={true}
@@ -422,7 +437,22 @@ const actions6 = [
               <strong>email: </strong><span>{this.state.donor.contact.email}</span><br/>
               <strong>phone: </strong><span>{this.state.donor.contact.phone}</span><br/>
               <strong>website: </strong><span>{this.state.donor.contact.website}</span><br/>
+              </TabPanel>
 
+              <TabPanel>
+              <section className="info">
+                <h2>Training</h2>
+                <FlatButton label="Add Training Data" primary={true}
+                   onClick={this.openTrain.bind(this)}/>
+             </section>
+                       <strong>Trainer & Video: </strong>{this.state.training.map (info => {
+                           return (<div onDoubleClick={this.deleteTrain.bind(this, info)}>
+                                     {info.trainerName} <a href={info.trainerLink}>{info.trainerLink}</a>
+                                     </div>)
+                           })}<br/>
+              </TabPanel>
+
+              <TabPanel>
               <section className="info">
               <h2>Employees</h2>
               <FlatButton label="Add Employees" primary={true}
@@ -433,17 +463,10 @@ const actions6 = [
                             {info.employeeName}
                           </p>)
                 })}<br/>
+                </TabPanel>
+                </Tabs>
 
-                <section className="info">
-                  <h2>Training</h2>
-                  <FlatButton label="Add Training Data" primary={true}
-                     onClick={this.openTrain.bind(this)}/>
-               </section>
-                         <strong>Trainer & Video: </strong>{this.state.training.map (info => {
-                             return (<div onDoubleClick={this.deleteTrain.bind(this, info)}>
-                                       {info.trainerName} <a href={info.trainerLink}>{info.trainerLink}</a>
-                                       </div>)
-                             })}<br/>
+
             </div>
 
             <Dialog
