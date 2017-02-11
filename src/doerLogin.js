@@ -3,6 +3,7 @@ import Dialog from 'material-ui/Dialog';
 import base from './config';
 import firebase from './config'
 import './index.css';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
@@ -519,6 +520,10 @@ class doerLogin extends Component {
                   return 200 - this.state.text.length;
               }
 
+              handleSelect(index, last) {
+                 console.log('Selected tab: ' + index + ', Last tab: ' + last);
+               }
+
     render (){
       console.log("donor key is", this.state.capDoer)
 
@@ -629,11 +634,15 @@ class doerLogin extends Component {
       floatingLabelStyle={styles.floatingLabelStyle}
       underlineFocusStyle={styles.underlineStyle}
      /> <br />
+
+     <div className='userLogin'>
      <RaisedButton
      label='Login'
      backgroundColor='#d15e29 '
      onClick={this.logIn.bind(this)}/>
+     </div>
     </section>
+
     <RaisedButton
        label="Logout"
        hidden={!this.state.userName}
@@ -647,8 +656,19 @@ class doerLogin extends Component {
 
       <div hidden={!this.state.userName}>
         <img src={this.state.testingPhoto}/>
+        <Tabs
+          onSelect={this.handleSelect}
+          selectedIndex={2}>
+          <TabList>
+                    <Tab className='tab'>About</Tab>
+                    <Tab className='tab'>Beneficiaries</Tab>
+                    <Tab className='tab'>Training</Tab>
+                    <Tab className='tab'>Performance</Tab>
+                    <Tab className='tab'>Accountability</Tab>
+          </TabList>
+          <TabPanel>
+            <h2>About</h2>
           <section className="info">
-          <h2>About</h2>
           <FlatButton label="Edit Name" primary={true}
             onClick={this.openEditName.bind(this)}/>
           </section>
@@ -679,8 +699,24 @@ class doerLogin extends Component {
               <strong>email: </strong><span>{this.state.doer.contact.email}</span><br/>
               <strong>phone: </strong><span>{this.state.doer.contact.phone}</span><br/>
               <strong>website: </strong><a href={this.state.doer.contact.website}>{this.state.doer.contact.website}</a><br/>
+            </TabPanel>
+
+            <TabPanel>
+            <h2>Beneficiaries</h2>
+            <section className="info">
+            <FlatButton label="Add Beneficiaries" primary={true}
+              onClick={this.openBen.bind(this)}/>
+            </section>
+              {this.state.beneficiaries.map (info => {
+                return (<p onDoubleClick={this.deleteBen.bind(this, info)}>
+                          {info.beneficiariesName}
+                        </p>)
+              })}<br/>
+            </TabPanel>
+
+            <TabPanel>
+              <h2>Training</h2>
               <section className="info">
-                <h2>Training</h2>
                 <FlatButton label="Add Training Data" primary={true}
                    onClick={this.openTrain.bind(this)}/>
              </section>
@@ -689,18 +725,10 @@ class doerLogin extends Component {
                                      {info.trainerName} <a href={info.trainerLink}>{info.trainerLink}</a>
                                      </div>)
                            })}<br/>
+              </TabPanel>
 
-                           <section className="info">
-                           <h2>Beneficiaries</h2>
-                           <FlatButton label="Add Beneficiaries" primary={true}
-                             onClick={this.openBen.bind(this)}/>
-                           </section>
-                             {this.state.beneficiaries.map (info => {
-                               return (<p onDoubleClick={this.deleteBen.bind(this, info)}>
-                                         {info.beneficiariesName}
-                                       </p>)
-                             })}<br/>
-
+              <TabPanel>
+              <h2>Performance</h2>
                              <section className="info">
                              <h2>Define Success</h2>
                              </section>
@@ -718,7 +746,6 @@ class doerLogin extends Component {
                                  <span>{this.state.doer.outcome}</span><br/>
 
 
-              <h2>Performance</h2>
               <section className="info">
                 <strong>90 Day Goals(no less than 4, no more than 6 rows)</strong>
                 <FlatButton label="Add Goal" primary={true}
@@ -863,16 +890,22 @@ class doerLogin extends Component {
                     </td>
                     </tr>
                    </table>
-                   <h2>accountability</h2>
-                   <h5>Upload a document</h5>
-                   <input className='upload' type='file' onChange={(e)=>this.handleChangeDocs(e)}/>
-                   <RaisedButton
-                   label='Retrieve doc'
-                   backgroundColor='#d15e29'
-                   onClick={this.getDocs.bind(this)}/>
-                   Instruction: Retrieve your document first before visiting the link.
-                   Your doc: <a href={this.state.getDoc}>Link to yout doc</a>
-             </div>
+                   </TabPanel>
+
+                   <TabPanel>
+                     <h2>Accountability</h2>
+                     <h5>Upload a document</h5>
+                     <input className='upload' type='file' onChange={(e)=>this.handleChangeDocs(e)}/>
+                     <RaisedButton
+                     label='Retrieve doc'
+                     backgroundColor='#d15e29'
+                     onClick={this.getDocs.bind(this)}/>
+                     Instruction: Retrieve your document first before visiting the link.
+                     Your doc: <a href={this.state.getDoc}>Link to yout doc</a>
+                   </TabPanel>
+                 </Tabs>
+               </div>
+
              <Dialog
                title="Change Organization, First, & Last Name"
                actions={actions}
