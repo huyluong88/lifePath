@@ -662,6 +662,7 @@ class doerLogin extends Component {
 
                 <TabPanel>
                     <h2>Performance</h2>
+                    <h6></h6>
                     <section className="info">
                         <h2>Define Success</h2>
                     </section>
@@ -678,6 +679,7 @@ class doerLogin extends Component {
 
 
                     <section className="info">
+                        <h3>*Double click on a goal to delete but always leave one goal on the list</h3><br/>
                         <strong>90 Day Goals(no less than 4, no more than 6 rows)</strong>
                         <FlatButton label="Add Goal" primary={true} onClick={this.openGoal.bind(this)}/>
                     </section>

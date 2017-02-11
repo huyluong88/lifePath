@@ -382,6 +382,8 @@ const actions6 = [
                 </TabList>
                 <TabPanel>
                     <section className="info">
+                    <h3>*Double click on an employee to delete </h3>
+
                         <h2>Employees</h2>
                         <FlatButton label="Add Employees" primary={true} onClick={this.openEmp.bind(this)}/>
                     </section>
