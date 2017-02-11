@@ -4,13 +4,6 @@ body {
     font-family: sans-serif;
     background-color: #d9dce0;
 }
-/*#a5a9af*/
-header {
-    /*display: flex;*/
-    /*flex-direction: row;*/
-    /*background-image: url('http://helpthekidsinafrica.weebly.com/uploads/2/9/3/6/29363543/7554705_orig.jpg');*/
-    /*background-repeat: no-repeat;*/
-}
 .link {
   color: white;
   text-decoration: none;
@@ -30,12 +23,9 @@ li {
     height: 15em;
 }
 
-.logo {
-    /*margin: auto;*/
-}
-
 img {
     height: 10em;
+    border-radius: 45px;
 }
 
 .utilities {
@@ -43,10 +33,6 @@ img {
     display: flex;
     width: 30%;
     margin: auto;
-}
-
-.buttons {
-    width: 12em;
 }
 
 .signUp {
@@ -134,8 +120,14 @@ table {
 .select-style select:focus {
     outline: none;
 }
-.input {
-  color: black;
+input {
+  width: 15em;
+  height: 1.5em;
+  border-radius: 7px;
+}
+.form-control {
+  width: 60em;
+  height: 10em;
 }
 
 .user {
@@ -150,10 +142,6 @@ table {
   margin: auto;
   flex-direction: row;
   justify-content: space-between;
-  /*padding: 15em;
-  margin-top: -12em;
-  margin-left: 5em;
-  margin-right: 5em;*/
 }
 .userBtn {
   width: 1em;
@@ -187,8 +175,11 @@ table {
 .userLogin {
  margin: 10px;
 }
-/*@media (max-width: 300px) {
-  .testDraw {
-    width: 30% !important;
-  }
-}*/
+.subButtons {
+  width: 12em;
+  margin: 5px;
+}
+.buttons {
+    width: 12em;
+    margin: 5px;
+}

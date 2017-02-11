@@ -24,7 +24,7 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .App {
     text-align: justify;
   }
@@ -36,16 +36,38 @@
   text-align: center;;
   }
   .buttons {
-    /*width: 6.5em !important;*/
     margin-left: -1em !important;
   }
   .testDraw {
-   width: 35% !important;
+   width: 31% !important;
+ }
+ .textField {
+   width: 90% !important;
  }
  .utilities {
    flex-direction: column;
  }
  .signUp {
    flex-direction: column;
+ }
+ .subButtons {
+   margin-left: -20% !important;
+ }
+ .signInPage {
+   display: flex;
+   flex-direction: column;
+ }
+ .form-control {
+   width: 25em !important;
+ }
+ h1 {
+   font-size: 25px;
+ }
+ .link {
+   padding: 0.2em !important;
+   font-size: 1em !important;
+ }
+ .appBar {
+   width: 150px !important;
  }
 }

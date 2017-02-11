@@ -7,14 +7,14 @@ import DoerProfile from './DoerProfile'
 import TextField from 'material-ui/TextField';
 
 const styles = {
-  marginLeft: 20,
-  width: 300,
-  underlineStyle: {
-    borderColor: '#d15e29',
-  },
-  floatingLabelStyle: {
-    color: 'white',
-  },
+    marginLeft: 20,
+    width: 300,
+    underlineStyle: {
+        borderColor: '#d15e29',
+    },
+    floatingLabelStyle: {
+        color: 'white',
+    },
 }
 
 class Doers extends Component {
@@ -27,7 +27,7 @@ class Doers extends Component {
         }
     }
     componentDidMount() {
-            base.fetch('doers', {
+        base.fetch('doers', {
             context: this,
             asArray: true,
             then: (data) => {
@@ -65,41 +65,22 @@ class Doers extends Component {
   render (){
 
   return(
-    <div>
-      <TextField
-       ref={input => this.searchDoer = input}
-       floatingLabelText="Search for a doer"
-       type="text"
-       style={styles}
-       floatingLabelStyle={styles.floatingLabelStyle}
-       underlineFocusStyle={styles.underlineStyle}
-      />
+<div>
+    <TextField ref={input=> this.searchDoer = input} floatingLabelText="Search a doer" type="text" style={styles} floatingLabelStyle={styles.floatingLabelStyle} underlineFocusStyle={styles.underlineStyle} className='textField'/>
 
-      <FlatButton
-        label="Search"
-        backgroundColor='#5b453b'
-        onClick={this.searchADoer}
-      />
-
-      {this.state.doerResult.map((doer)=>{
-        return (<li>
-                <Link className='user' to ={`/doers/${doer.key}`}>
-                {doer.general.firstName} {doer.general.lastName}
+        <FlatButton label="Search" backgroundColor='#5b453b' onClick={this.searchADoer} /> {this.state.doerResult.map((doer)=>{ return (
+        <li>
+            <Link className='user' to={`/doers/${doer.key}`}> {doer.general.firstName} {doer.general.lastName}
+            </Link>
+        </li>) }) }
+        <ul>
+            {this.state.doers.map((doer, index) => { return (
+            <li key={index}>
+                <Link className='user' to={`/doers/${doer.key}`}> {doer.general.firstName} {doer.general.lastName}
                 </Link>
-                </li>)
-              })
-      }
-      <ul>
-        {this.state.doers.map((doer, index) => {
-          return (<li key={index}>
-                  <Link className='user' to ={`/doers/${doer.key}`}>
-                  {doer.general.firstName} {doer.general.lastName}
-                  </Link>
-                  </li>)
-                })
-        }
-      </ul>
-    </div>
+            </li>) }) }
+        </ul>
+</div>
   )
 }
 }
