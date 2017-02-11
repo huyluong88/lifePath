@@ -15,26 +15,28 @@ import doerLogin from './doerLogin';
 import FlatButton from 'material-ui/FlatButton';
 
 const style = {
-  margin: 12,
-  backgroundColor: '#d15e29',
+    margin: 12,
+    backgroundColor: '#d15e29',
 };
-const style2 ={
-  backgroundColor: '#d15e29',
+const style2 = {
+    backgroundColor: '#d15e29',
 }
 
 class App extends Component {
-  constructor(){
-    super()
-    this.state = {
-      open: false,
-      open2: false,
+    constructor() {
+        super()
+        this.state = {
+            open: false,
+            open2: false,
+        }
     }
-  }
-  handleToggle = () => this.setState({open: !this.state.open});
-  handleToggle2 = () => this.setState({open2: !this.state.open2});
-  testing(user){
-  console.log('prop user is ', user.email)
-  }
+    handleToggle = () => this.setState({
+        open: !this.state.open
+    });
+    handleToggle2 = () => this.setState({
+        open2: !this.state.open2
+    });
+
   render() {
 
     return (
@@ -63,7 +65,7 @@ class App extends Component {
                   <RaisedButton label="Donors" backgroundColor='#d15e29' style={style} className="buttons"
                    onClick={this.handleToggle2}/>
                   <Drawer width={250} openSecondary={true} open={this.state.open2} containerClassName='testDraw' >
-                      <AppBar showMenuIconButton={false} title="Donors" style={style2}/>
+                      <AppBar className='appBar' showMenuIconButton={false} title="Donors" style={style2}/>
                       <Donors />
                   </Drawer>
               </div>
