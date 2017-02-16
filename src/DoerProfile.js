@@ -40,6 +40,8 @@ class DoerProfile extends Component {
             email: '',
             phone: '',
             website: '',
+            success: '',
+            outcome: '',
             ninetydayGoals: [],
             weeklyScore: [],
             yearand3years: [],
@@ -103,7 +105,9 @@ class DoerProfile extends Component {
                     weeklyScore: data.performance.weeklyScore,
                     yearand3years: data.performance.yearand3years,
                     training: data.training,
-                    beneficiaries: data.beneficiaries
+                    beneficiaries: data.beneficiaries,
+                    success: data.success,
+                    outcome: data.outcome
                 })
                 console.log("what is", data)
             }
@@ -156,7 +160,9 @@ class DoerProfile extends Component {
                     yearand3years: data.performance.yearand3years,
                     accountability: data.accountability,
                     training: data.training,
-                    beneficiaries: data.beneficiaries
+                    beneficiaries: data.beneficiaries,
+                    success: data.success,
+                    outcome: data.outcome
                 })
             }
         })
@@ -177,7 +183,7 @@ render (){
 
             <div className="utilities">
                 <RaisedButton label="Home" backgroundColor='#d15e29' className="buttons" href='/' style={style}/>
-            
+
                 <RaisedButton label="Doers" backgroundColor='#d15e29 ' style={style} className="buttons" onClick={this.handleToggle}/>
 
                 <Drawer open={this.state.open} containerClassName='testDraw'>
@@ -237,6 +243,16 @@ render (){
 
                 <TabPanel>
                     <h2>Performance</h2>
+                    <section className="info">
+                    <strong>Our Definition for Success</strong><br/>
+                    <span>{this.state.success}</span><br/>
+                    </section>
+
+                    <section className="info">
+                    <strong>Our Expected Outcome</strong><br/>
+                    <span>{this.state.outcome}</span><br/>
+                    </section>
+
                     <strong>90 Day Goals</strong>
                     <table className="tg">
                         <tr>
