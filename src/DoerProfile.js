@@ -243,6 +243,7 @@ render (){
 
                 <TabPanel>
                     <h2>Performance</h2>
+
                     <section className="info">
                     <strong>Our Definition for Success</strong><br/>
                     <span>{this.state.success}</span><br/>
